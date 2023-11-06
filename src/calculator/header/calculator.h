@@ -1,5 +1,5 @@
 /**
- * @file calculator.h
+ * @file tourism.h
  * 
  * @brief Provides functions for math. utilities
  */
@@ -11,13 +11,13 @@
 
 namespace Coruh
 {
-    namespace Calculator
+    namespace Tourism
     {
         /**
-            @class Calculator
+            @class Tourism
             @brief Provides Basic functions for various operations.
         */
-        class Calculator
+        class Tourism
         {
         public:
             /**

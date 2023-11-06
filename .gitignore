@@ -965,7 +965,7 @@ coverage*[.json, .xml, .info]
 /docs/coveragereport
 /docs/coverxygen
 /site
-/calculator/cobertura.xml
+/tourism/cobertura.xml
 /cobertura.xml
 *.orig
 *.cov

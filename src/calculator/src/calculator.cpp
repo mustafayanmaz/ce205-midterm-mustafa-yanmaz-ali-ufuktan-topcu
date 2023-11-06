@@ -1,21 +1,21 @@
-#include "../header/calculator.h"
+#include "../header/tourism.h"
 #include <stdexcept>
 
-using namespace Coruh::Calculator;
+using namespace Coruh::Tourism;
 
-double Calculator::add(double a, double b) {
+double Tourism::add(double a, double b) {
     return a + b;
 }
 
-double Calculator::subtract(double a, double b) {
+double Tourism::subtract(double a, double b) {
     return a - b;
 }
 
-double Calculator::multiply(double a, double b) {
+double Tourism::multiply(double a, double b) {
     return a * b;
 }
 
-double Calculator::divide(double a, double b) {
+double Tourism::divide(double a, double b) {
     if (b == 0) {
         throw std::invalid_argument("Division by zero is not allowed.");
     }

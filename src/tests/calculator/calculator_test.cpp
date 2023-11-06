@@ -1,9 +1,9 @@
-//#define ENABLE_CALCULATOR_TEST  // Uncomment this line to enable the Calculator tests
+//#define ENABLE_CALCULATOR_TEST  // Uncomment this line to enable the Tourism tests
 
 #include "gtest/gtest.h"
-#include "../../calculator/header/calculator.h"  // Adjust this include path based on your project structure
+#include "../../tourism/header/tourism.h"  // Adjust this include path based on your project structure
 
-using namespace Coruh::Calculator;
+using namespace Coruh::Tourism;
 
 class CalculatorTest : public ::testing::Test {
 protected:
@@ -17,27 +17,27 @@ protected:
 };
 
 TEST_F(CalculatorTest, TestAdd) {
-	double result = Calculator::add(5.0, 3.0);
+	double result = Tourism::add(5.0, 3.0);
 	EXPECT_DOUBLE_EQ(result, 8.0);
 }
 
 TEST_F(CalculatorTest, TestSubtract) {
-	double result = Calculator::subtract(5.0, 3.0);
+	double result = Tourism::subtract(5.0, 3.0);
 	EXPECT_DOUBLE_EQ(result, 2.0);
 }
 
 TEST_F(CalculatorTest, TestMultiply) {
-	double result = Calculator::multiply(5.0, 3.0);
+	double result = Tourism::multiply(5.0, 3.0);
 	EXPECT_DOUBLE_EQ(result, 15.0);
 }
 
 TEST_F(CalculatorTest, TestDivide) {
-	double result = Calculator::divide(6.0, 3.0);
+	double result = Tourism::divide(6.0, 3.0);
 	EXPECT_DOUBLE_EQ(result, 2.0);
 }
 
 TEST_F(CalculatorTest, TestDivideByZero) {
-	EXPECT_THROW(Calculator::divide(5.0, 0.0), std::invalid_argument);
+	EXPECT_THROW(Tourism::divide(5.0, 0.0), std::invalid_argument);
 }
 
 /**

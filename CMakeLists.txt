@@ -40,8 +40,8 @@ set(CRYPTOPP_BUILD_SHARED OFF)
 set(CRYPTOPP_USE_MASTER_BRANCH FALSE)
 
 option(ENABLE_UTILITY "Enable Utility Module" ON)
-option(ENABLE_CALCULATOR "Enable Calculator Module" ON)
-option(ENABLE_CALCULATOR_APP "Enable Calculator Application" ON)
+option(ENABLE_CALCULATOR "Enable Tourism Module" ON)
+option(ENABLE_CALCULATOR_APP "Enable Tourism Application" ON)
 option(ENABLE_TESTS "Enable All Tests" ON)
 
 # Configure tests
@@ -102,7 +102,7 @@ endif()
 
 # Logger submodule
 if(ENABLE_CALCULATOR)
-	add_subdirectory(${ROOT}/calculator)
+	add_subdirectory(${ROOT}/tourism)
 endif()
 
 # BigInteger for Crypto submodule

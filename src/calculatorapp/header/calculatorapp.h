@@ -1,6 +1,6 @@
 /**
  * @file calculatorapp.h
- * @brief Calculator Application header file
+ * @brief Tourism Application header file
  *
  */
 

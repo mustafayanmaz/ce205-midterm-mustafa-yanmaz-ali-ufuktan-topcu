@@ -1,6 +1,6 @@
 # crypto/CMakeLists.txt
 set(ROOT src)
-set(LIBNAME calculator)
+set(LIBNAME tourism)
 
 message(STATUS "[${ROOT}/${LIBNAME}] Module Processing...")
 
@@ -36,7 +36,7 @@ install(TARGETS ${LIBNAME}
         RUNTIME DESTINATION bin )
 		
 # Copy required header to the installation include folder		
-install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/header/calculator.h
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/header/tourism.h
         DESTINATION include)
 
 # Export the crypto target so other modules can use it
