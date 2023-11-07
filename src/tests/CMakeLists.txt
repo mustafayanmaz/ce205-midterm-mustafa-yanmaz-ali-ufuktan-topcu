@@ -38,7 +38,7 @@ if(ENABLE_UTILITY)
 endif()
 
 # Tourism tests
-if(ENABLE_CALCULATOR)
+if(ENABLE_TOURISM)
 	add_subdirectory(tourism)
 endif()
 
