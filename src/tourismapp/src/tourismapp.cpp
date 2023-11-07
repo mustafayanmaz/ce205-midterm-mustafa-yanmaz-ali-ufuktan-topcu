@@ -9,14 +9,15 @@ private:
     vector<string> destinations;
     vector<string> activities;
 
+
 public:
     void AddDestination(const string& destination) {
         destinations.push_back(destination);
         cout << "Added destination: " << destination << endl;
         SaveDestinationsToFile(destinations, "destinations.txt"); // Verileri kaydet
     }
-    void SaveDestinationsToFile(const vector<string>& destinations, const string& fileName) {
-        ofstream file(fileName);
+    void TourProgramManagement::SaveDestinationsToFile(const vector<string>& destinations, const string& fileName) {
+        ofstream file(fileName); // Yeni bir dosya oluşturur (var olanı siler).
         if (file.is_open()) {
             for (const string& destination : destinations) {
                 file << destination << endl;
@@ -30,17 +31,43 @@ public:
     }
 
 
-    void TourProgramManagement::UpdateDestination(int index, const string& newDestination) {
-        if (index >= 0 && index < destinations.size()) {
+
+
+    void TourProgramManagement::UpdateDestination() {
+        int index;
+        string newDestination;
+
+        if (destinations.empty()) {
+            cout << "No destinations to update." << endl;
+            return;
+        }
+
+        cout << "Select a destination to update:" << endl;
+        for (int i = 0; i < destinations.size(); i++) {
+            cout << i + 1 << ". " << destinations[i] << endl;
+        }
+        cout << "Enter the number of the destination to update: ";
+        cin >> index;
+
+        if (index >= 1 && index <= destinations.size()) {
+            index--; // Adjust the index to match vector indexing (0-based).
+
+            cout << "Enter the new destination name: ";
+            cin >> newDestination;
+
             string oldDestination = destinations[index];
             destinations[index] = newDestination;
             cout << "Updated destination at index " << index << ": " << oldDestination << " -> " << newDestination << endl;
-            SaveDestinationsToFile(destinations, "destinations.txt"); // Verileri kaydet
+            SaveDestinationsToFile(destinations, "destinations.txt");
         }
         else {
-            cout << "Invalid index. Update failed." << endl;
+            cout << "Invalid choice. Update failed." << endl;
         }
     }
+
+
+
+
 
 
     void DeleteDestination(int index) {
@@ -93,14 +120,10 @@ void tourProgramManagementMenu() {
         break;
         case 2:
         {
-            int index;
-            string newDestination;
-            cout << "Enter the index of the destination to update: ";
-            cin >> index;
-            cout << "Enter the new destination: ";
-            cin >> newDestination;
-            tourManager.UpdateDestination(index, newDestination);
+            tourManager.UpdateDestination();
         }
+        break;
+
         break;
         case 3:
         {
