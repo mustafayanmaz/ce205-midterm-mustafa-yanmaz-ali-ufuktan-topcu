@@ -70,15 +70,33 @@ public:
 
 
 
-    void DeleteDestination(int index) {
-        if (index >= 0 && index < destinations.size()) {
+    void TourProgramManagement::DeleteDestination() {
+        if (destinations.empty()) {
+            cout << "No destinations to delete." << endl;
+            return;
+        }
+
+        cout << "Destinations:\n";
+        for (int i = 0; i < destinations.size(); i++) {
+            cout << i + 1 << ". " << destinations[i] << endl;
+        }
+
+        int index;
+        cout << "Enter the number of the destination to delete: ";
+        cin >> index;
+
+        if (index >= 1 && index <= destinations.size()) {
+            index--; // Adjust the index to match vector indexing (0-based).
+
             cout << "Deleted destination at index " << index << ": " << destinations[index] << endl;
             destinations.erase(destinations.begin() + index);
+            SaveDestinationsToFile(destinations, "destinations.txt");
         }
         else {
-            cout << "Invalid index. Deletion failed." << endl;
+            cout << "Invalid choice. Deletion failed." << endl;
         }
     }
+
 
     void CategorizeByDestination() {
         cout << "Destinations:\n";
@@ -127,12 +145,10 @@ void tourProgramManagementMenu() {
         break;
         case 3:
         {
-            int index;
-            cout << "Enter the index of the destination to delete: ";
-            cin >> index;
-            tourManager.DeleteDestination(index);
+            tourManager.DeleteDestination();
         }
         break;
+
         case 4:
             tourManager.CategorizeByDestination();
             break;
