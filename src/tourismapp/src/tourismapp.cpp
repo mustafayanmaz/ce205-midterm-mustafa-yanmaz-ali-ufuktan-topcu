@@ -6,24 +6,26 @@ using namespace std;
 
 class TourProgramManagement {
 private:
-    vector<string> destinations;
+    vector<string> tours;
     vector<string> activities;
+    vector<string> destinations;
+
 
 
 public:
-    void AddDestination(const string& destination) {
-        destinations.push_back(destination);
-        cout << "Added destination: " << destination << endl;
-        SaveDestinationsToFile(destinations, "destinations.txt"); // Verileri kaydet
+    void AddTour(const string& tour) {
+        tours.push_back(tour);
+        cout << "Added tour: " << tour << endl;
+        SaveToursToFile(tours, "tours.txt"); // Verileri kaydet
     }
-    void TourProgramManagement::SaveDestinationsToFile(const vector<string>& destinations, const string& fileName) {
+    void TourProgramManagement::SaveToursToFile(const vector<string>& tours, const string& fileName) {
         ofstream file(fileName); // Yeni bir dosya oluşturur (var olanı siler).
         if (file.is_open()) {
-            for (const string& destination : destinations) {
-                file << destination << endl;
+            for (const string& tour : tours) {
+                file << tour << endl;
             }
             file.close();
-            cout << "Destinations have been saved to '" << fileName << "'." << endl;
+            cout << "Tours have been saved to '" << fileName << "'." << endl;
         }
         else {
             cerr << "Failed to open the file for writing." << endl;
@@ -33,32 +35,32 @@ public:
 
 
 
-    void TourProgramManagement::UpdateDestination() {
+    void TourProgramManagement::UpdateTour() {
         int index;
-        string newDestination;
+        string newTour;
 
-        if (destinations.empty()) {
-            cout << "No destinations to update." << endl;
+        if (tours.empty()) {
+            cout << "No tours to update." << endl;
             return;
         }
 
-        cout << "Select a destination to update:" << endl;
-        for (int i = 0; i < destinations.size(); i++) {
-            cout << i + 1 << ". " << destinations[i] << endl;
+        cout << "Select a tour to update:" << endl;
+        for (int i = 0; i < tours.size(); i++) {
+            cout << i + 1 << ". " << tours[i] << endl;
         }
-        cout << "Enter the number of the destination to update: ";
+        cout << "Enter the number of the tour to update: ";
         cin >> index;
 
-        if (index >= 1 && index <= destinations.size()) {
+        if (index >= 1 && index <= tours.size()) {
             index--; // Adjust the index to match vector indexing (0-based).
 
-            cout << "Enter the new destination name: ";
-            cin >> newDestination;
+            cout << "Enter the new tour name: ";
+            cin >> newTour;
 
-            string oldDestination = destinations[index];
-            destinations[index] = newDestination;
-            cout << "Updated destination at index " << index << ": " << oldDestination << " -> " << newDestination << endl;
-            SaveDestinationsToFile(destinations, "destinations.txt");
+            string oldTour = tours[index];
+            tours[index] = newTour;
+            cout << "Updated tour at index " << index << ": " << oldTour << " -> " << newTour << endl;
+            SaveToursToFile(tours, "tours.txt");
         }
         else {
             cout << "Invalid choice. Update failed." << endl;
@@ -70,27 +72,27 @@ public:
 
 
 
-    void TourProgramManagement::DeleteDestination() {
-        if (destinations.empty()) {
-            cout << "No destinations to delete." << endl;
+    void TourProgramManagement::DeleteTour() {
+        if (tours.empty()) {
+            cout << "No tours to delete." << endl;
             return;
         }
 
-        cout << "Destinations:\n";
-        for (int i = 0; i < destinations.size(); i++) {
-            cout << i + 1 << ". " << destinations[i] << endl;
+        cout << "Tours:\n";
+        for (int i = 0; i < tours.size(); i++) {
+            cout << i + 1 << ". " << tours[i] << endl;
         }
 
         int index;
-        cout << "Enter the number of the destination to delete: ";
+        cout << "Enter the number of the tour to delete: ";
         cin >> index;
 
-        if (index >= 1 && index <= destinations.size()) {
+        if (index >= 1 && index <= tours.size()) {
             index--; // Adjust the index to match vector indexing (0-based).
 
-            cout << "Deleted destination at index " << index << ": " << destinations[index] << endl;
-            destinations.erase(destinations.begin() + index);
-            SaveDestinationsToFile(destinations, "destinations.txt");
+            cout << "Deleted tour at index " << index << ": " << tours[index] << endl;
+            tours.erase(tours.begin() + index);
+            SaveToursToFile(tours, "tours.txt");
         }
         else {
             cout << "Invalid choice. Deletion failed." << endl;
@@ -100,17 +102,18 @@ public:
 
     void CategorizeByDestination() {
         cout << "Destinations:\n";
-        for (const string& destination : destinations) {
-            cout << destination << endl;
+        for (const string& tour : tours) {
+            cout << tour << endl;
         }
     }
 
     void CategorizeByActivity() {
         cout << "Activities:\n";
-        for (const string& activity : activities) {
-            cout << activity << endl;
+        for (const string& tour : tours) {
+            cout << tour << endl;
         }
     }
+    
 };
 
 void tourProgramManagementMenu() {
@@ -118,9 +121,9 @@ void tourProgramManagementMenu() {
     int choice;
     do {
         cout << "Tour and Package Program Management\n";
-        cout << "1. Add Destination\n";
-        cout << "2. Update Destination\n";
-        cout << "3. Delete Destination\n";
+        cout << "1. Add Tour\n";
+        cout << "2. Update Tour\n";
+        cout << "3. Delete Tour\n";
         cout << "4. Categorize by Destination\n";
         cout << "5. Categorize by Activity\n";
         cout << "0. Back to Main Menu\n";
@@ -130,22 +133,22 @@ void tourProgramManagementMenu() {
         switch (choice) {
         case 1:
         {
-            string newDestination;
-            cout << "Enter the destination to add: ";
-            cin >> newDestination;
-            tourManager.AddDestination(newDestination);
+            string newTour;
+            cout << "Enter the tour to add: ";
+            cin >> newTour;
+            tourManager.AddTour(newTour);
         }
         break;
         case 2:
         {
-            tourManager.UpdateDestination();
+            tourManager.UpdateTour();
         }
         break;
 
         break;
         case 3:
         {
-            tourManager.DeleteDestination();
+            tourManager.DeleteTour();
         }
         break;
 
