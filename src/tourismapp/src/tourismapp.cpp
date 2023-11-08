@@ -6,23 +6,46 @@ using namespace std;
 
 class TourProgramManagement {
 private:
-    vector<string> tours;
-    vector<string> activities;
-    vector<string> destinations;
+    struct Tour {
+        string name;
+        string destination;
+        string activity;
+        double price;
+    };
 
-
+    vector<Tour> tours;
 
 public:
-    void AddTour(const string& tour) {
-        tours.push_back(tour);
-        cout << "Added tour: " << tour << endl;
-        SaveToursToFile(tours, "tours.txt"); // Verileri kaydet
+    void AddTour() {
+        Tour newTour;
+
+        cout << "Enter the tour name: ";
+        cin >> newTour.name;
+
+        cout << "Enter the tour destination: ";
+        cin >> newTour.destination;
+
+        cout << "Enter the tour activity: ";
+        cin >> newTour.activity;
+
+        cout << "Enter the tour price: ";
+        cin >> newTour.price;
+
+        tours.push_back(newTour);
+
+        cout << "Added tour: " << newTour.name << endl;
+        SaveToursToFile(tours, "tours.txt");
     }
-    void TourProgramManagement::SaveToursToFile(const vector<string>& tours, const string& fileName) {
-        ofstream file(fileName); // Yeni bir dosya oluşturur (var olanı siler).
+
+    void SaveToursToFile(const vector<Tour>& tours, const string& fileName) {
+        ofstream file(fileName);
         if (file.is_open()) {
-            for (const string& tour : tours) {
-                file << tour << endl;
+            for (const Tour& tour : tours) {
+                file << "Name: " << tour.name << endl;
+                file << "Destination: " << tour.destination << endl;
+                file << "Activity: " << tour.activity << endl;
+                file << "Price: " << tour.price << endl;
+                file << endl;
             }
             file.close();
             cout << "Tours have been saved to '" << fileName << "'." << endl;
@@ -32,10 +55,7 @@ public:
         }
     }
 
-
-
-
-    void TourProgramManagement::UpdateTour() {
+    void UpdateTour() {
         int index;
         string newTour;
 
@@ -46,7 +66,7 @@ public:
 
         cout << "Select a tour to update:" << endl;
         for (int i = 0; i < tours.size(); i++) {
-            cout << i + 1 << ". " << tours[i] << endl;
+            cout << i + 1 << ". " << tours[i].name << endl;
         }
         cout << "Enter the number of the tour to update: ";
         cin >> index;
@@ -57,8 +77,8 @@ public:
             cout << "Enter the new tour name: ";
             cin >> newTour;
 
-            string oldTour = tours[index];
-            tours[index] = newTour;
+            string oldTour = tours[index].name;
+            tours[index].name = newTour;
             cout << "Updated tour at index " << index << ": " << oldTour << " -> " << newTour << endl;
             SaveToursToFile(tours, "tours.txt");
         }
@@ -67,12 +87,7 @@ public:
         }
     }
 
-
-
-
-
-
-    void TourProgramManagement::DeleteTour() {
+    void DeleteTour() {
         if (tours.empty()) {
             cout << "No tours to delete." << endl;
             return;
@@ -80,7 +95,7 @@ public:
 
         cout << "Tours:\n";
         for (int i = 0; i < tours.size(); i++) {
-            cout << i + 1 << ". " << tours[i] << endl;
+            cout << i + 1 << ". " << tours[i].name << endl;
         }
 
         int index;
@@ -90,7 +105,7 @@ public:
         if (index >= 1 && index <= tours.size()) {
             index--; // Adjust the index to match vector indexing (0-based).
 
-            cout << "Deleted tour at index " << index << ": " << tours[index] << endl;
+            cout << "Deleted tour at index " << index << ": " << tours[index].name << endl;
             tours.erase(tours.begin() + index);
             SaveToursToFile(tours, "tours.txt");
         }
@@ -99,21 +114,19 @@ public:
         }
     }
 
-
     void CategorizeByDestination() {
         cout << "Destinations:\n";
-        for (const string& tour : tours) {
-            cout << tour << endl;
+        for (const Tour& tour : tours) {
+            cout << tour.destination << endl;
         }
     }
 
     void CategorizeByActivity() {
         cout << "Activities:\n";
-        for (const string& tour : tours) {
-            cout << tour << endl;
+        for (const Tour& tour : tours) {
+            cout << tour.activity << endl;
         }
     }
-    
 };
 
 void tourProgramManagementMenu() {
@@ -132,26 +145,14 @@ void tourProgramManagementMenu() {
 
         switch (choice) {
         case 1:
-        {
-            string newTour;
-            cout << "Enter the tour to add: ";
-            cin >> newTour;
-            tourManager.AddTour(newTour);
-        }
-        break;
+            tourManager.AddTour();
+            break;
         case 2:
-        {
             tourManager.UpdateTour();
-        }
-        break;
-
-        break;
+            break;
         case 3:
-        {
             tourManager.DeleteTour();
-        }
-        break;
-
+            break;
         case 4:
             tourManager.CategorizeByDestination();
             break;
@@ -163,6 +164,7 @@ void tourProgramManagementMenu() {
             break;
         default:
             cout << "Invalid choice. Please try again.\n";
+            break;
         }
     } while (choice != 0);
 }
@@ -221,6 +223,7 @@ int main() {
             break;
         default:
             cout << "Invalid choice. Please try again.\n";
+            break;
         }
     } while (choice != 0);
 
