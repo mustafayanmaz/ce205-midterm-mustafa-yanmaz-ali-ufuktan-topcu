@@ -121,14 +121,26 @@ public:
     void CategorizeByDestination() {
         cout << "Destinations:\n";
         for (const Tour& tour : tours) {
-            cout << tour.destination << endl;
+            cout << "-----------------------------------" << endl;
+            cout << "THE DESTINATION :" << tour.destination << endl;
+            cout << "Tour Name : " << tour.name << endl;
+            cout << "Destination : "<<tour.destination << endl;
+            cout <<"Tour Price : "<< tour.price << endl;
+            
         }
+        
+       
     }
 
     void CategorizeByActivity() {
         cout << "Activities:\n";
         for (const Tour& tour : tours) {
-            cout << tour.activity << endl;
+            cout << "-----------------------------------" << endl;
+            cout << "THE ACTIVITY :" << tour.activity << endl;
+            cout << "Tour Name : " << tour.name << endl;
+            cout << "Activity : " << tour.destination << endl;
+            cout << "Tour Price : " << tour.price << endl;
+            
         }
     }
 };
