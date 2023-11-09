@@ -5,10 +5,18 @@
 #include "../../tourism/src/tourism.cpp"
 using namespace std;
 
-
+void printArt() {
+    cout << "    ######   #####   ##   ##   #####      ##     ######   ######            #####    ###### " << endl;
+    cout << "      ##    ##   ##  ##   ##  ##   ##     ##    ##       ## ## ##          ##   ##  ##   " << endl;
+    cout << "      ##    ##   ##  ##   ##  ## ###      ##     #####   ## ## ##          ## ####  ## ### " << endl;
+    cout << "      ##    ##   ##  ##   ##  ##   ##     ##         ##  ## ## ##          ##   ##  ## " << endl;
+    cout << "      ##     #####    #####   ##   ##     ##    ######   ## ## ##          ##   ##  ## " << endl;
+    cout << endl;
+}
 int main() {
     int choice;
     do {
+        printArt();
         cout << "Tourism and Travel Agency Automation\n";
         cout << "1. Tour and Package Program Management\n";
         cout << "2. Client Reservation and Payment Tracking\n";
