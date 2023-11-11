@@ -61,7 +61,8 @@ public:
 
     void UpdateTour() {
         int index;
-        string newTour;
+        string newName, newDestination, newActivity;
+        double newPrice;
 
         if (tours.empty()) {
             cout << "No tours to update." << endl;
@@ -79,12 +80,35 @@ public:
             index--; // Adjust the index to match vector indexing (0-based).
 
             cout << "Enter the new tour name: ";
-            cin >> newTour;
+            cin >> newName;
 
-            string oldTour = tours[index].name;
-            tours[index].name = newTour;
-            cout << "Updated tour at index " << index << ": " << oldTour << " -> " << newTour << endl;
-            SaveToursToFile(tours, "tours.txt");
+            cout << "Enter the new destination: ";
+            cin >> newDestination;
+
+            cout << "Enter the new activity: ";
+            cin >> newActivity;
+
+            cout << "Enter the new price: ";
+            cin >> newPrice;
+
+            // Store old values for display purposes
+            string oldName = tours[index].name;
+            string oldDestination = tours[index].destination;
+            string oldActivity = tours[index].activity;
+            double oldPrice = tours[index].price;
+
+            // Update the tour
+            tours[index].name = newName;
+            tours[index].destination = newDestination;
+            tours[index].activity = newActivity;
+            tours[index].price = newPrice;
+
+            // Display the update
+            cout << "Updated tour at index " << index << ": " << endl;
+            cout << "Name: " << oldName << " -> " << newName << endl;
+            cout << "Destination: " << oldDestination << " -> " << newDestination << endl;
+            cout << "Activity: " << oldActivity << " -> " << newActivity << endl;
+            cout << "Price: " << oldPrice << " -> " << newPrice << endl;  SaveToursToFile(tours, "tours.txt");
         }
         else {
             cout << "Invalid choice. Update failed." << endl;
