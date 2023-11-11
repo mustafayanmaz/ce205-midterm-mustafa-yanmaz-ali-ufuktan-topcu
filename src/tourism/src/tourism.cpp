@@ -19,7 +19,41 @@ private:
 
     vector<Tour> tours;
 
+
 public:
+    TourProgramManagement() {
+        tours = LoadToursFromFile("tours.txt");
+    }
+
+    vector<Tour> LoadToursFromFile(const string& fileName) {
+        vector<Tour> tours;
+        ifstream file(fileName);
+        if (file.is_open()) {
+            Tour tour;
+            string line;
+            while (getline(file, line)) {
+                if (line.find("Name: ") == 0) {
+                    tour.name = line.substr(6);
+                }
+                else if (line.find("Destination: ") == 0) {
+                    tour.destination = line.substr(13);
+                }
+                else if (line.find("Activity: ") == 0) {
+                    tour.activity = line.substr(10);
+                }
+                else if (line.find("Price: ") == 0) {
+                    tour.price = stod(line.substr(7));
+                    tours.push_back(tour);
+                }
+            }
+            file.close();
+            cout << "Tours have been loaded from '" << fileName << "'." << endl;
+        }
+        else {
+            cerr << "Failed to open the file for reading." << endl;
+        }
+        return tours;
+    }
     void AddTour() {
         Tour newTour;
 
