@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <stack>
+#include <queue>
 using namespace std;
 
 using namespace Coruh::Tourism;
@@ -205,6 +207,23 @@ public:
 
 
 
+
+void printPopularDestinations(stack<string>& destinationStack, queue<string>& destinationQueue) {
+    cout << "Popular Destinations (Stack):\n";
+    while (!destinationStack.empty()) {
+        cout << destinationStack.top() << endl;
+        destinationStack.pop();
+    }
+
+    cout << "\nPopular Destinations (Queue):\n";
+    while (!destinationQueue.empty()) {
+        cout << destinationQueue.front() << endl;
+        destinationQueue.pop();
+    }
+}
+
+
+
 void clientReservationAndPaymentTracking() {
     cout << "Client Reservation and Payment Tracking Menu\n";
     // Müþteri rezervasyon ve ödeme takibi iþlemleri burada gerçekleþtirilebilir
@@ -214,10 +233,102 @@ void guideAndTransportationPlanning() {
     cout << "Guide and Transportation Planning Menu\n";
     // Rehber ve ulaþým planlama iþlemleri burada gerçekleþtirilebilir
 }
+struct Node {
+    string data;
+    Node* next;
+    Node* prev;
+};
+
+class DoubleLinkedList {
+private:
+    Node* head;
+
+public:
+    DoubleLinkedList() : head(nullptr) {}
+
+    void addNode(const string& data) {
+        Node* newNode = new Node;
+        newNode->data = data;
+        newNode->next = nullptr;
+        newNode->prev = nullptr;
+
+        if (!head) {
+            head = newNode;
+        }
+        else {
+            Node* temp = head;
+            while (temp->next) {
+                temp = temp->next;
+            }
+            temp->next = newNode;
+            newNode->prev = temp;
+        }
+    }
+
+    void printList() {
+        Node* temp = head;
+        int index = 1;
+        while (temp) {
+            cout << index << "-" << temp->data << endl;
+            temp = temp->next;
+            ++index;
+        }
+    }
+};
 
 void reporting() {
-    cout << "Reporting Menu\n";
-    // Raporlama iþlemleri burada gerçekleþtirilebilir
+    DoubleLinkedList popularDestinationsList;
+    DoubleLinkedList seasonalTrendsList;
+    DoubleLinkedList clientFeedbackList;
+
+    while (true) {
+        cout << "Reporting Menu\n";
+        cout << "1. Popular Destinations\n";
+        cout << "2. Seasonal Trends\n";
+        cout << "3. Client Feedback\n";
+        cout << "0. Back to Main Menu\n";
+
+        int choice;
+        cout << "Seciminizi yapin: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            // Popular Destinations
+            popularDestinationsList.addNode("Mugla");
+            popularDestinationsList.addNode("Mersin");
+            popularDestinationsList.addNode("Nevsehir");
+            popularDestinationsList.addNode("Antalya");
+            popularDestinationsList.addNode("Kayseri");
+            popularDestinationsList.addNode("Trabzon");
+
+            popularDestinationsList.printList();
+            break;
+        case 2:
+            // Seasonal Trends
+            seasonalTrendsList.addNode("Kayak");
+            seasonalTrendsList.addNode("Baloon");
+            seasonalTrendsList.addNode("SnowBoard");
+            seasonalTrendsList.addNode("Ice Skate");
+            seasonalTrendsList.addNode("Ugur Hocanin Odevini Yapmak");
+
+            seasonalTrendsList.printList();
+            break;
+        case 3:
+            // Client Feedback
+            clientFeedbackList.addNode("Feedback 1");
+            clientFeedbackList.addNode("Feedback 2");
+            clientFeedbackList.addNode("Feedback 3");
+
+            clientFeedbackList.printList();
+            break;
+        case 0:
+            // Ana Menüye Dön
+            return;
+        default:
+            cout << "Geçersiz seçim!\n";
+        }
+    }
 }
 
 void integrations() {
