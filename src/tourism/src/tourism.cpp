@@ -184,12 +184,12 @@ public:
             cout << "-----------------------------------" << endl;
             cout << "THE DESTINATION :" << tour.destination << endl;
             cout << "Tour Name : " << tour.name << endl;
-            cout << "Destination : "<<tour.destination << endl;
-            cout <<"Tour Price : "<< tour.price << endl;
-            
+            cout << "Destination : " << tour.destination << endl;
+            cout << "Tour Price : " << tour.price << endl;
+
         }
-        
-       
+
+
     }
 
     void CategorizeByActivity() {
@@ -200,7 +200,7 @@ public:
             cout << "Tour Name : " << tour.name << endl;
             cout << "Activity : " << tour.destination << endl;
             cout << "Tour Price : " << tour.price << endl;
-            
+
         }
     }
 };
@@ -226,12 +226,12 @@ void printPopularDestinations(stack<string>& destinationStack, queue<string>& de
 
 void clientReservationAndPaymentTracking() {
     cout << "Client Reservation and Payment Tracking Menu\n";
-    // Müþteri rezervasyon ve ödeme takibi iþlemleri burada gerçekleþtirilebilir
+   
 }
 
 void guideAndTransportationPlanning() {
     cout << "Guide and Transportation Planning Menu\n";
-    // Rehber ve ulaþým planlama iþlemleri burada gerçekleþtirilebilir
+   
 }
 struct Node {
     string data;
@@ -276,62 +276,8 @@ public:
     }
 };
 
-void reporting() {
-    DoubleLinkedList popularDestinationsList;
-    DoubleLinkedList seasonalTrendsList;
-    DoubleLinkedList clientFeedbackList;
-
-    while (true) {
-        cout << "Reporting Menu\n";
-        cout << "1. Popular Destinations\n";
-        cout << "2. Seasonal Trends\n";
-        cout << "3. Client Feedback\n";
-        cout << "0. Back to Main Menu\n";
-
-        int choice;
-        cout << "Seciminizi yapin: ";
-        cin >> choice;
-
-        switch (choice) {
-        case 1:
-            // Popular Destinations
-            popularDestinationsList.addNode("Mugla");
-            popularDestinationsList.addNode("Mersin");
-            popularDestinationsList.addNode("Nevsehir");
-            popularDestinationsList.addNode("Antalya");
-            popularDestinationsList.addNode("Kayseri");
-            popularDestinationsList.addNode("Trabzon");
-
-            popularDestinationsList.printList();
-            break;
-        case 2:
-            // Seasonal Trends
-            seasonalTrendsList.addNode("Kayak");
-            seasonalTrendsList.addNode("Baloon");
-            seasonalTrendsList.addNode("SnowBoard");
-            seasonalTrendsList.addNode("Ice Skate");
-            seasonalTrendsList.addNode("Ugur Hocanin Odevini Yapmak");
-
-            seasonalTrendsList.printList();
-            break;
-        case 3:
-            // Client Feedback
-            clientFeedbackList.addNode("Feedback 1");
-            clientFeedbackList.addNode("Feedback 2");
-            clientFeedbackList.addNode("Feedback 3");
-
-            clientFeedbackList.printList();
-            break;
-        case 0:
-            // Ana Menüye Dön
-            return;
-        default:
-            cout << "Geçersiz seçim!\n";
-        }
-    }
-}
 
 void integrations() {
     cout << "Integrations Menu\n";
-    // Entegrasyon iþlemleri burada gerçekleþtirilebilir
+    
 }

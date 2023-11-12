@@ -53,6 +53,63 @@ void tourProgramManagementMenu() {
         }
     } while (choice != 0);
 }
+void reporting() {
+    DoubleLinkedList popularDestinationsList;
+    DoubleLinkedList seasonalTrendsList;
+    DoubleLinkedList clientFeedbackList;
+
+    while (true) {
+        cout << "Reporting Menu\n";
+        cout << "1. Popular Destinations\n";
+        cout << "2. Seasonal Trends\n";
+        cout << "3. Client Feedback\n";
+        cout << "0. Back to Main Menu\n";
+
+        int choice;
+        cout << "Please Select: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            // Popular Destinations
+            popularDestinationsList.addNode("Mugla");
+            popularDestinationsList.addNode("Mersin");
+            popularDestinationsList.addNode("Nevsehir");
+            popularDestinationsList.addNode("Antalya");
+            popularDestinationsList.addNode("Kayseri");
+            popularDestinationsList.addNode("Trabzon");
+
+            popularDestinationsList.printList();
+            break;
+        case 2:
+            // Seasonal Trends
+            seasonalTrendsList.addNode("Ski");
+            seasonalTrendsList.addNode("Baloon");
+            seasonalTrendsList.addNode("SnowBoard");
+            seasonalTrendsList.addNode("IceSkate");
+            seasonalTrendsList.addNode("Doing the homework given by professor Ugur");
+
+            seasonalTrendsList.printList();
+            break;
+        case 3:
+            // Client Feedback       
+            clientFeedbackList.addNode("Excellent service! The staff was very friendly and accommodating.");
+            clientFeedbackList.addNode(" We had an amazing time on the tour. The itinerary was well-planned.");
+            clientFeedbackList.addNode("The tour package offered great value for the money.");
+            clientFeedbackList.addNode("The transportation arrangements were convenient and comfortable.");
+            clientFeedbackList.addNode("Knowledgeable guides made the trip informative and enjoyable.");
+            clientFeedbackList.addNode("The variety of activities provided a well-rounded experience");
+            clientFeedbackList.printList();
+            break;
+        case 0:
+            // Ana Menüye Dön
+            return;
+        default:
+            cout << "Invalid selection!\n";
+        }
+    }
+}
+
 int main() {
     int choice;
     do {
