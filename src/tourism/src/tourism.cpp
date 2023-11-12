@@ -56,6 +56,50 @@ public:
         }
         return tours;
     }
+    void Itineraries() {
+        // Tur adlarını ekrana yaz
+        cout << "Available Tours:\n";
+        for (size_t i = 0; i < tours.size(); ++i) {
+            cout << i + 1 << "-" << tours[i].name << endl;
+        }
+
+        // Kullanıcıdan bir tur seçmesini iste
+        int choice;
+        cout << "Enter the number of the tour to view its itinerary: ";
+        cin >> choice;
+
+        // Seçilen turun index'ini bul
+        int tourIndex = choice - 1;
+
+        // Hatalı bir seçim yapıldıysa uyarı ver ve fonksiyondan çık
+        if (tourIndex < 0 || tourIndex >= tours.size()) {
+            cout << "Invalid choice. Itinerary view failed.\n";
+            return;
+        }
+
+        // Kullanıcıdan güzergahı al
+        string itinerary;
+        cout << "Enter the itinerary for " << tours[tourIndex].name << ": ";
+        cin.ignore();  // Boşluk karakterlerini temizle
+        getline(cin, itinerary);
+
+        // Güzergahı tourismitineraries.txt dosyasına kaydet
+        ofstream outFile("tourismitineraries.txt", ios::app);
+        if (outFile.is_open()) {
+            outFile << choice << "-" << tours[tourIndex].name << endl;
+            outFile << "Itinerary: " << itinerary << endl;
+            outFile << "-------------------------\n";
+            outFile.close();
+            cout << "Itinerary for " << tours[tourIndex].name << " has been saved.\n";
+        }
+
+        else {
+            cerr << "Failed to open the file for writing.\n";
+        }
+    }
+
+
+
     void AddTour() {
         Tour newTour;
 
@@ -226,12 +270,42 @@ void printPopularDestinations(stack<string>& destinationStack, queue<string>& de
 
 void clientReservationAndPaymentTracking() {
     cout << "Client Reservation and Payment Tracking Menu\n";
-   
+
 }
 
 void guideAndTransportationPlanning() {
-    cout << "Guide and Transportation Planning Menu\n";
-   
+    TourProgramManagement tourManager;  // TourProgramManagement sınıfından bir nesne oluşturuyoruz.
+
+    int choice;
+    do {
+        cout << "Guide and Transportation Planning Menu\n";
+        cout << "1-Itineraries\n";
+        cout << "2-Vehicle Assignments\n";
+        cout << "3-Guide Training Records\n";
+        cout << "4-Back to Main Menu\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            tourManager.Itineraries();
+            break;
+        case 2:
+            // Vehicle Assignments işlemleri eklenecek (istenildiğinde).
+            cout << "This feature is not implemented yet.\n";
+            break;
+        case 3:
+            // Guide Training Records işlemleri eklenecek (istenildiğinde).
+            cout << "This feature is not implemented yet.\n";
+            break;
+        case 4:
+            cout << "Returning to the main menu...\n";
+            break;
+        default:
+            cout << "Invalid choice. Please try again.\n";
+            break;
+        }
+    } while (choice != 4);
 }
 struct Node {
     string data;
@@ -279,5 +353,5 @@ public:
 
 void integrations() {
     cout << "Integrations Menu\n";
-    
+
 }
