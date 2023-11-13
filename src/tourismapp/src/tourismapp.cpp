@@ -112,7 +112,70 @@ void reporting() {
         }
     }
 }
+void vehicleAssignmentsMenu(TourProgramManagement& tourManager) {
+    int vehicleChoice;
 
+    do {
+        cout << "\nVehicle Assignments Menu:\n";
+        cout << "1- Add Vehicle\n";
+        cout << "2- Assign to Vehicle\n";
+        cout << "0- Return to Guide and Transportation Menu\n";
+        cout << "Enter your choice: ";
+        cin >> vehicleChoice;
+
+        switch (vehicleChoice) {
+        case 1:
+            // Add Vehicle
+            tourManager.addVehicle();
+            break;
+        case 2:
+            // Assign to Vehicle
+            tourManager.assignToVehicle();
+            break;
+        case 0:
+            // Return to Guide and Transportation Menu
+            cout << "Returning to Guide and Transportation Menu.\n";
+            break;
+        default:
+            cout << "Invalid choice. Please enter a valid option.\n";
+            break;
+        }
+    } while (vehicleChoice != 0);
+}
+void guideAndTransportationPlanning() {
+    TourProgramManagement tourManager;  // TourProgramManagement sınıfından bir nesne oluşturuyoruz.
+
+    int choice;
+    do {
+        cout << "Guide and Transportation Planning Menu\n";
+        cout << "1-Itineraries\n";
+        cout << "2-Vehicle Assignments\n";
+        cout << "3-Guide Training Records\n";
+        cout << "4-Back to Main Menu\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            tourManager.Itineraries();
+            break;
+        case 2:
+            // Vehicle Assignments işlemleri eklenecek (istenildiğinde).
+            vehicleAssignmentsMenu(tourManager);
+            break;
+        case 3:
+            // Guide Training Records işlemleri eklenecek (istenildiğinde).
+            cout << "This feature is not implemented yet.\n";
+            break;
+        case 4:
+            cout << "Returning to the main menu...\n";
+            break;
+        default:
+            cout << "Invalid choice. Please try again.\n";
+            break;
+        }
+    } while (choice != 4);
+}
 int main() {
     int choice;
     do {

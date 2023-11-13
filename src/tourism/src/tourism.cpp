@@ -97,6 +97,141 @@ public:
             cerr << "Failed to open the file for writing.\n";
         }
     }
+    void vehicleAssignments() {
+        int choice;
+
+        do {
+            cout << "\nVehicle Assignments Menu:\n";
+            cout << "1- Add Vehicle\n";
+            cout << "2- Assign to Vehicle\n";
+            cout << "0- Return to Guide and Transportation Menu\n";
+            cout << "Enter your choice: ";
+            cin >> choice;
+
+            switch (choice) {
+            case 1:
+                addVehicle();
+                break;
+
+            case 2:
+                assignToVehicle();
+                break;
+
+            case 0:
+                // Return to Guide and Transportation Menu
+                cout << "Returning to Guide and Transportation Menu.\n";
+                break;
+
+            default:
+                cout << "Invalid choice. Please enter a valid option.\n";
+                break;
+            }
+
+        } while (choice != 0);
+    }
+
+    void addVehicle() {
+        string brand;
+        int year, kms;
+
+        cout << "Enter the vehicle brand: ";
+        cin >> brand;
+
+        cout << "Enter the vehicle year: ";
+        cin >> year;
+
+        cout << "Enter the vehicle kilometers: ";
+        cin >> kms;
+
+        ofstream outFile("vehicle.txt", ios::app);  // Open the file in append mode
+        if (outFile.is_open()) {
+            outFile << "Brand: " << brand << endl;
+            outFile << "Year: " << year << endl;
+            outFile << "Kilometers: " << kms << endl;
+            outFile << "-------------------------\n";
+            outFile.close();
+            cout << "Vehicle has been added.\n";
+        }
+        else {
+            cerr << "Failed to open the file for writing.\n";
+        }
+    }
+
+
+
+    void assignToVehicle() {
+        if (tours.empty()) {
+            cout << "No tours available for assignment.\n";
+            return;
+        }
+
+        // Display available tours
+        cout << "Available Tours:\n";
+        for (size_t i = 0; i < tours.size(); ++i) {
+            cout << i + 1 << "-" << tours[i].name << endl;
+        }
+
+        // Get user's choice
+        int tourChoice;
+        cout << "Enter the number of the tour to assign a vehicle: ";
+        cin >> tourChoice;
+
+        // Validate tour choice
+        if (tourChoice < 1 || tourChoice > static_cast<int>(tours.size())) {
+            cout << "Invalid choice. Assignment failed.\n";
+            return;
+        }
+
+        // Display available vehicles
+        vector<string> vehicles = getAvailableVehicles();
+        cout << "Available Vehicles:\n";
+        for (size_t i = 0; i < vehicles.size(); ++i) {
+            cout << i + 1 << "-" << vehicles[i] << endl;
+        }
+
+        // Get user's choice for vehicle
+        int vehicleChoice;
+        cout << "Enter the number of the vehicle to assign to the tour: ";
+        cin >> vehicleChoice;
+
+        // Validate vehicle choice
+        if (vehicleChoice < 1 || vehicleChoice > static_cast<int>(vehicles.size())) {
+            cout << "Invalid choice. Assignment failed.\n";
+            return;
+        }
+
+        // Create and save assignment record
+        ofstream outFile("tourandvehicle.txt", ios::app);
+        if (outFile.is_open()) {
+            outFile << "Tour: " << tours[tourChoice - 1].name << endl;
+            outFile << "Vehicle: " << vehicles[vehicleChoice - 1] << endl;
+            outFile << "-------------------------\n";
+            outFile.close();
+            cout << "Assignment has been made.\n";
+        }
+        else {
+            cerr << "Failed to open the file for writing.\n";
+        }
+    }
+
+    vector<string> getAvailableVehicles() {
+        vector<string> vehicles;
+        ifstream file("vehicle.txt");
+        if (file.is_open()) {
+            string line;
+            while (getline(file, line)) {
+                if (line.find("Brand: ") == 0) {
+                    vehicles.push_back(line.substr(7));
+                }
+            }
+            file.close();
+        }
+        else {
+            cerr << "Failed to open the file for reading.\n";
+        }
+        return vehicles;
+    }
+
 
 
 
@@ -273,40 +408,7 @@ void clientReservationAndPaymentTracking() {
 
 }
 
-void guideAndTransportationPlanning() {
-    TourProgramManagement tourManager;  // TourProgramManagement sınıfından bir nesne oluşturuyoruz.
 
-    int choice;
-    do {
-        cout << "Guide and Transportation Planning Menu\n";
-        cout << "1-Itineraries\n";
-        cout << "2-Vehicle Assignments\n";
-        cout << "3-Guide Training Records\n";
-        cout << "4-Back to Main Menu\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
-
-        switch (choice) {
-        case 1:
-            tourManager.Itineraries();
-            break;
-        case 2:
-            // Vehicle Assignments işlemleri eklenecek (istenildiğinde).
-            cout << "This feature is not implemented yet.\n";
-            break;
-        case 3:
-            // Guide Training Records işlemleri eklenecek (istenildiğinde).
-            cout << "This feature is not implemented yet.\n";
-            break;
-        case 4:
-            cout << "Returning to the main menu...\n";
-            break;
-        default:
-            cout << "Invalid choice. Please try again.\n";
-            break;
-        }
-    } while (choice != 4);
-}
 struct Node {
     string data;
     Node* next;
