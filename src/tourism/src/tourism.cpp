@@ -17,7 +17,9 @@ private:
         string destination;
         string activity;
         double price;
+        int numberOfPeople; // New field for the number of people
     };
+
 
     vector<Tour> tours;
 
@@ -131,7 +133,7 @@ public:
     }
 
     void addVehicle() {
-        string brand;
+        string brand, licensePlate;
         int year, kms;
 
         cout << "Enter the vehicle brand: ";
@@ -143,11 +145,17 @@ public:
         cout << "Enter the vehicle kilometers: ";
         cin >> kms;
 
-        ofstream outFile("vehicle.txt", ios::app);  // Open the file in append mode
+        cin.ignore();  // Ignore the newline character left in the buffer
+
+        cout << "Enter the vehicle license plate: ";
+        getline(cin, licensePlate);  // Read the entire line, including spaces
+
+        ofstream outFile("vehicle.txt", ios::app);
         if (outFile.is_open()) {
             outFile << "Brand: " << brand << endl;
             outFile << "Year: " << year << endl;
             outFile << "Kilometers: " << kms << endl;
+            outFile << "License Plate: " << licensePlate << endl;
             outFile << "-------------------------\n";
             outFile.close();
             cout << "Vehicle has been added.\n";
@@ -436,29 +444,35 @@ public:
         cout << "Enter the tour price: ";
         cin >> newTour.price;
 
+        cout << "Enter the number of people: ";
+        cin >> newTour.numberOfPeople;
+
         tours.push_back(newTour);
 
         cout << "Added tour: " << newTour.name << endl;
         SaveToursToFile(tours, "tours.txt");
     }
 
+
     void SaveToursToFile(const vector<Tour>& tours, const string& fileName) {
-        ofstream file(fileName);
-        if (file.is_open()) {
-            for (const Tour& tour : tours) {
-                file << "Name: " << tour.name << endl;
-                file << "Destination: " << tour.destination << endl;
-                file << "Activity: " << tour.activity << endl;
-                file << "Price: " << tour.price << endl;
-                file << endl;
-            }
-            file.close();
-            cout << "Tours have been saved to '" << fileName << "'." << endl;
+    ofstream file(fileName);
+    if (file.is_open()) {
+        for (const Tour& tour : tours) {
+            file << "Name: " << tour.name << endl;
+            file << "Destination: " << tour.destination << endl;
+            file << "Activity: " << tour.activity << endl;
+            file << "Price: " << tour.price << endl;
+            file << "Number of People: " << tour.numberOfPeople << endl; // Include number of people
+            file << endl;
         }
-        else {
-            cerr << "Failed to open the file for writing." << endl;
-        }
+        file.close();
+        cout << "Tours have been saved to '" << fileName << "'." << endl;
     }
+    else {
+        cerr << "Failed to open the file for writing." << endl;
+    }
+}
+
 
     void UpdateTour() {
         int index;
