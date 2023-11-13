@@ -1,6 +1,6 @@
 # aka5g/CMakeLists.txt
 set(ROOT src)
-set(APPNAME calculatorapp)
+set(APPNAME tourismapp)
 
 message(STATUS "[${ROOT}/${APPNAME}] Module Processing...")
 

@@ -142,6 +142,36 @@ void vehicleAssignmentsMenu(TourProgramManagement& tourManager) {
         }
     } while (vehicleChoice != 0);
 }
+void guideAssignmentsMenu(TourProgramManagement& tourManager) {
+    int guideChoice;
+
+    do {
+        cout << "\nGuide and Trasnportation Records Menu:\n";
+        cout << "1- Add Guide\n";
+        cout << "2- Assign Guide to Tour\n";
+        cout << "0- Return to Guide and Transportation Menu\n";
+        cout << "Enter your choice: ";
+        cin >> guideChoice;
+
+        switch (guideChoice) {
+        case 1:
+            // Add Vehicle
+            tourManager.addGuide();
+            break;
+        case 2:
+            // Assign to Vehicle
+            tourManager.assignToGuide();
+            break;
+        case 0:
+            // Return to Guide and Transportation Menu
+            cout << "Returning to Guide and Transportation Menu.\n";
+            break;
+        default:
+            cout << "Invalid choice. Please enter a valid option.\n";
+            break;
+        }
+    } while (guideChoice != 0);
+}
 void guideAndTransportationPlanning() {
     TourProgramManagement tourManager;  // TourProgramManagement sınıfından bir nesne oluşturuyoruz.
 
@@ -165,7 +195,7 @@ void guideAndTransportationPlanning() {
             break;
         case 3:
             // Guide Training Records işlemleri eklenecek (istenildiğinde).
-            cout << "This feature is not implemented yet.\n";
+            guideAssignmentsMenu(tourManager);
             break;
         case 4:
             cout << "Returning to the main menu...\n";

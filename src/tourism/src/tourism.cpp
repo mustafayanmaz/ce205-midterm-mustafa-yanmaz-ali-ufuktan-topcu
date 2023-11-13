@@ -235,6 +235,192 @@ public:
 
 
 
+
+
+
+
+
+
+
+
+
+    void guideRecords() {
+        int choice;
+
+        do {
+            cout << "\nGuide Training Records Menu:\n";
+            cout << "1- Add Guide\n";
+            cout << "2- Assign Guide to Tour\n";
+            cout << "0- Return to Guide and Transportation Menu\n";
+            cout << "Enter your choice: ";
+            cin >> choice;
+
+            switch (choice) {
+            case 1:
+                addGuide();
+                break;
+
+            case 2:
+                assignToGuide();
+                break;
+
+            case 0:
+                // Return to Guide and Transportation Menu
+                cout << "Returning to Guide and Transportation Menu.\n";
+                break;
+
+            default:
+                cout << "Invalid choice. Please enter a valid option.\n";
+                break;
+            }
+
+        } while (choice != 0);
+    }
+
+    void addGuide() {
+        string name, surname, sex;
+        int old, experience;
+
+        cout << "Enter the Guide Name: ";
+        cin >> name;
+
+        cout << "Enter the Guide Surname: ";
+        cin >> surname;
+
+        cout << "Enter the Gender: ";
+        cin >> sex;
+        cout << "Enter the Guides Old: ";
+        cin >> old;
+        cout << "Enter the Guides Experience (year): ";
+        cin >> experience;
+
+        ofstream outFile("guide.txt", ios::app);  // Open the file in append mode
+        if (outFile.is_open()) {
+            outFile << "Name: " << name << endl;
+            outFile << "Surname: " << surname << endl;
+            outFile << "Gender: " << sex << endl;
+            outFile << "Old: " << old << endl;
+            outFile << "Experience: " << experience << endl;
+            outFile << "-------------------------\n";
+            outFile.close();
+            cout << "Guide has been added.\n";
+        }
+        else {
+            cerr << "Failed to open the file for writing.\n";
+        }
+    }
+
+
+
+    void assignToGuide() {
+        if (tours.empty()) {
+            cout << "No tours available for assignment.\n";
+            return;
+        }
+
+        // Display available tours
+        cout << "Available Tours:\n";
+        for (size_t i = 0; i < tours.size(); ++i) {
+            cout << i + 1 << "-" << tours[i].name << endl;
+        }
+
+        // Get user's choice
+        int tourChoice;
+        cout << "Enter the number of the tour to assign a guide: ";
+        cin >> tourChoice;
+
+        // Validate tour choice
+        if (tourChoice < 1 || tourChoice > static_cast<int>(tours.size())) {
+            cout << "Invalid choice. Assignment failed.\n";
+            return;
+        }
+
+        // Display available guides
+        vector<string> guides = getAvailableGuides();
+        cout << "Available Guides:\n";
+        for (size_t i = 0; i < guides.size(); ++i) {
+            cout << i + 1 << "-" << guides[i] << endl;
+        }
+
+        // Get user's choice for guide
+        int guideChoice;
+        cout << "Enter the number of the guide to assign to the tour: ";
+        cin >> guideChoice;
+
+        // Validate guide choice
+        if (guideChoice < 1 || guideChoice > static_cast<int>(guides.size())) {
+            cout << "Invalid choice. Assignment failed.\n";
+            return;
+        }
+
+        // Create and save assignment record
+        ofstream outFile("tourandguide.txt", ios::app);
+        if (outFile.is_open()) {
+            outFile << "Tour: " << tours[tourChoice - 1].name << endl;
+            // Retrieve guide details
+            string guideDetails = getGuideDetails(guides[guideChoice - 1]);
+            outFile << "Guide Details: " << guideDetails << endl;
+            outFile << "-------------------------\n";
+            outFile.close();
+            cout << "Assignment has been made.\n";
+        }
+        else {
+            cerr << "Failed to open the file for writing.\n";
+        }
+    }
+
+    string getGuideDetails(const string& guideName) {
+        ifstream file("guide.txt");
+        if (file.is_open()) {
+            string line;
+            while (getline(file, line)) {
+                // Find lines starting with "Name: "
+                size_t found = line.find("Name: " + guideName);
+                if (found != string::npos) {
+                    // Include relevant lines for guide details
+                    string guideDetails;
+                    for (int i = 0; i < 5; ++i) {
+                        getline(file, line);
+                        guideDetails += line + "\n";
+                    }
+                    file.close();
+                    return guideDetails;
+                }
+            }
+            file.close();
+        }
+        cerr << "Guide details not found for " << guideName << ".\n";
+        return "";
+    }
+
+
+    vector<string> getAvailableGuides() {
+        vector<string> guides;
+        ifstream file("guide.txt");
+        if (file.is_open()) {
+            string line;
+            while (getline(file, line)) {
+                // Find lines starting with "Name: "
+                size_t found = line.find("Name: ");
+                if (found != string::npos) {
+                    // Extract the guide name (skip "Name: " prefix)
+                    string guideName = line.substr(found + 6);
+                    guides.push_back(guideName);
+                }
+            }
+            file.close();
+        }
+        else {
+            cerr << "Failed to open the file for reading.\n";
+        }
+        return guides;
+    }
+
+
+
+
+
+
     void AddTour() {
         Tour newTour;
 
