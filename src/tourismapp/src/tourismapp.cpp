@@ -172,65 +172,9 @@ void guideAssignmentsMenu(TourProgramManagement& tourManager) {
         }
     } while (guideChoice != 0);
 }
-void TripCustomization() {
-    cout << "Enter Trip Name: ";
-    string tripName;
-    cin.ignore(); // Önceki girişlerden gelen gereksiz karakterleri temizle
-    getline(cin, tripName);
 
-    cout << "Trip Customization Menu for " << tripName << "\n";
-    cout << "1. Add Boat Trip\n";
-    cout << "2. Add Museum Visit\n";
-    cout << "3. Add Atv Trip\n";
-    cout << "Press 0 to go back to the main menu\n";
 
-    int choice;
-    cin >> choice;
 
-    switch (choice) {
-    case 0:
-        return;
-    case 1:
-        // AddBoatTrip fonksiyonunu çağırın ve tripName'i iletilen parametre olarak ekleyin
-        AddBoatTrip(tripName);
-        break;
-    case 2:AddMuseumVisit(tripName);
-        break;
-    case 3:
-        // AddBoatTrip fonksiyonunu çağırın ve tripName'i iletilen parametre olarak ekleyin
-        AddAtvTrip(tripName);
-        break;
-        // Diğer durumlar için gerekli işlemleri ekleyin
-    default:
-        cout << "Invalid choice. Returning to the main menu.\n";
-        break;
-    }
-}
-
-void clientReservationAndPaymentTracking() {
-    cout << "Main Menu\n";
-    cout << "1- Booking Confirmation\n";
-    cout << "2- Trip Customization\n";
-    cout << "0- Exit\n";
-    cout << "Enter your choice: ";
-
-    int choice;
-    cin >> choice;
-
-    switch (choice) {
-    case 1:
-        BookingConfirmation();
-        break;
-    case 2:
-        TripCustomization();
-        break;
-    case 0:
-        cout << "Exiting the program. Goodbye!\n";
-        exit(0);
-    default:
-        cout << "Invalid choice. Please enter a valid option.\n";
-    }
-}
 void guideAndTransportationPlanning() {
     TourProgramManagement tourManager;  // TourProgramManagement sınıfından bir nesne oluşturuyoruz.
 
@@ -267,6 +211,113 @@ void guideAndTransportationPlanning() {
 }
 
 
+
+
+
+
+//**************************************************************************************************
+
+
+
+void customerAssignmentsMenu(TourProgramManagement& tourManager) {
+    int customerChoice;
+
+    do {
+        cout << "\nCustomer Assignments Menu:\n";
+        cout << "1- Add Customer\n";
+        cout << "2- Assign Customer to Tour\n";
+        cout << "0- Return to Client Reservation and Payment Tracking Menu\n";
+        cout << "Enter your choice: ";
+        cin >> customerChoice;
+
+        switch (customerChoice) {
+        case 1:
+            // Add Vehicle
+            tourManager.addCustomer(); //********************
+            break;
+        case 2:
+            // Assign to Vehicle
+            tourManager.assignToCustomer();
+            break;
+        case 0:
+            // Return to Guide and Transportation Menu
+            cout << "Returning to Guide and Transportation Menu.\n";
+            break;
+        default:
+            cout << "Invalid choice. Please enter a valid option.\n";
+            break;
+        }
+    } while (customerChoice != 0);
+}
+
+
+void tripAssignmentsMenu(TourProgramManagement& tourManager) {
+    int tripChoice;
+
+    do {
+        cout << "\nCustomer Assignments Menu:\n";
+        cout << "1- Add Trip\n";
+        cout << "2- Assign Trip to Tour\n";
+        cout << "0- Return to Client Reservation and Payment Tracking Menu\n";
+        cout << "Enter your choice: ";
+        cin >> tripChoice;
+
+        switch (tripChoice) {
+        case 1:
+            // Add Vehicle
+            tourManager.addTrip(); //********************
+            break;
+        case 2:
+            // Assign to Vehicle
+            tourManager.assignToTrip();
+            break;
+        case 0:
+            // Return to Guide and Transportation Menu
+            cout << "Returning to Guide and Transportation Menu.\n";
+            break;
+        default:
+            cout << "Invalid choice. Please enter a valid option.\n";
+            break;
+        }
+    } while (tripChoice != 0);
+}
+void clientReservationAndPaymentTracking() {
+    TourProgramManagement tourManager;  // TourProgramManagement sınıfından bir nesne oluşturuyoruz.
+
+    int choice;
+    do {
+        cout << "Client Reservation And Payment Tracking Menu\n";
+        cout << "1-Booking Confirmations\n";
+        cout << "2-Trip Customization \n";
+        cout << "Goood Luck\n";
+        cout << "4-Back to Main Menu\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            customerAssignmentsMenu(tourManager);
+            
+            break;
+        case 2:
+            // Vehicle Assignments işlemleri eklenecek (istenildiğinde).
+            tripAssignmentsMenu(tourManager);
+            break;
+        case 3:
+            // Guide Training Records işlemleri eklenecek (istenildiğinde).
+            cout << "Good Luck...\n";
+            break;
+        case 4:
+            cout << "Returning to the main menu...\n";
+            break;
+        default:
+            cout << "Invalid choice. Please try again.\n";
+            break;
+        }
+    } while (choice != 4);
+}
+
+//*************************************************************************************
 
 
 
