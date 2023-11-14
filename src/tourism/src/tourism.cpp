@@ -583,6 +583,133 @@ public:
         }
     }
 };
+void BookingConfirmation() {
+    cout << "Booking Confirmation Menu\n";
+    // Buraya Booking Confirmation ile ilgili kodları ekleyin
+
+    cout << "Press 0 to go back to the main menu\n";
+    int choice;
+    cin >> choice;
+    if (choice == 0) {
+        return;
+    }
+    else {
+        cout << "Invalid choice. Returning to the main menu.\n";
+    }
+}
+
+void AddMuseumVisit(const string& tripName) {
+    cout << "Adding Museum Visit...\n";
+
+    // Kullanıcıdan müze ziyareti bilgilerini al
+    string museumName;
+    cout << "Enter Museum Name: ";
+    cin.ignore(); // Önceki girişlerden gelen gereksiz karakterleri temizle
+    getline(cin, museumName);
+
+    string visitDate;
+    cout << "Enter Visit Date: ";
+    getline(cin, visitDate);
+
+    double museumPrice;
+    cout << "Enter Museum Price: ";
+    cin >> museumPrice;
+
+    // Açılmak istenen dosya
+    ofstream outFile("customization.txt", ios::app);
+
+    if (outFile.is_open()) {
+        // Yeni müze ziyareti bilgilerini dosyaya ekle
+        outFile << "\n" << tripName << " - Museum Visit Information:\n";
+        outFile << "Museum Name: " << museumName << "\n";
+        outFile << "Visit Date: " << visitDate << "\n";
+        outFile << "Price: " << museumPrice << "\n";
+
+        cout << "Museum Visit added and saved.\n";
+
+        // Dosyayı kapat
+        outFile.close();
+    }
+    else {
+        cerr << "Failed to open the file for writing.\n";
+    }
+}
+void AddBoatTrip(const string& tripName) {
+    cout << "Adding Boat Trip...\n";
+
+    // Kullanıcıdan tekne gezisi bilgilerini al
+    string boatName;
+    cout << "Enter Boat Trip Name: ";
+    cin.ignore(); // Önceki girişlerden gelen gereksiz karakterleri temizle
+    getline(cin, boatName);
+
+    double boatCost;
+    cout << "Enter Boat Trip Cost: ";
+    cin >> boatCost;
+
+    string boatDate;
+    cout << "Enter Boat Trip Date: ";
+    cin.ignore(); // Önceki girişlerden gelen gereksiz karakterleri temizle
+    getline(cin, boatDate);
+
+    // Açılmak istenen dosya
+    ofstream outFile("customization.txt", ios::app);
+
+    if (outFile.is_open()) {
+        // Yeni tekne turu bilgilerini dosyaya ekle
+        outFile << "\n" << tripName << " - Boat Trip Information:\n";
+        outFile << "Name: " << boatName << "\n";
+        outFile << "Date: " << boatDate << "\n";
+        outFile << "Cost: " << boatCost << "\n";
+
+        cout << "Boat Trip added and saved.\n";
+
+        // Dosyayı kapat
+        outFile.close();
+    }
+    else {
+        cerr << "Failed to open the file for writing.\n";
+    }
+}
+void AddAtvTrip(const string& tripName) {
+    cout << "Adding ATV Trip...\n";
+
+    // Kullanıcıdan ATV turu bilgilerini al
+    string atvName;
+    cout << "Enter ATV Trip Name: ";
+    cin.ignore(); // Önceki girişlerden gelen gereksiz karakterleri temizle
+    getline(cin, atvName);
+
+    double atvCost;
+    cout << "Enter ATV Trip Cost: ";
+    cin >> atvCost;
+
+    string atvDate;
+    cout << "Enter ATV Trip Date: ";
+    cin.ignore(); // Önceki girişlerden gelen gereksiz karakterleri temizle
+    getline(cin, atvDate);
+
+    // Açılmak istenen dosya
+    ofstream outFile("customization.txt", ios::app);
+
+    if (outFile.is_open()) {
+        // Yeni ATV turu bilgilerini dosyaya ekle
+        outFile << "\n" << tripName << " - ATV Trip Information:\n";
+        outFile << "Name: " << atvName << "\n";
+        outFile << "Date: " << atvDate << "\n";
+        outFile << "Cost: " << atvCost << "\n";
+
+        cout << "ATV Trip added and saved.\n";
+
+        // Dosyayı kapat
+        outFile.close();
+    }
+    else {
+        cerr << "Failed to open the file for writing.\n";
+    }
+}
+
+
 
 
 
@@ -603,10 +730,6 @@ void printPopularDestinations(stack<string>& destinationStack, queue<string>& de
 
 
 
-void clientReservationAndPaymentTracking() {
-    cout << "Client Reservation and Payment Tracking Menu\n";
-
-}
 
 
 struct Node {

@@ -172,6 +172,65 @@ void guideAssignmentsMenu(TourProgramManagement& tourManager) {
         }
     } while (guideChoice != 0);
 }
+void TripCustomization() {
+    cout << "Enter Trip Name: ";
+    string tripName;
+    cin.ignore(); // Önceki girişlerden gelen gereksiz karakterleri temizle
+    getline(cin, tripName);
+
+    cout << "Trip Customization Menu for " << tripName << "\n";
+    cout << "1. Add Boat Trip\n";
+    cout << "2. Add Museum Visit\n";
+    cout << "3. Add Atv Trip\n";
+    cout << "Press 0 to go back to the main menu\n";
+
+    int choice;
+    cin >> choice;
+
+    switch (choice) {
+    case 0:
+        return;
+    case 1:
+        // AddBoatTrip fonksiyonunu çağırın ve tripName'i iletilen parametre olarak ekleyin
+        AddBoatTrip(tripName);
+        break;
+    case 2:AddMuseumVisit(tripName);
+        break;
+    case 3:
+        // AddBoatTrip fonksiyonunu çağırın ve tripName'i iletilen parametre olarak ekleyin
+        AddAtvTrip(tripName);
+        break;
+        // Diğer durumlar için gerekli işlemleri ekleyin
+    default:
+        cout << "Invalid choice. Returning to the main menu.\n";
+        break;
+    }
+}
+
+void clientReservationAndPaymentTracking() {
+    cout << "Main Menu\n";
+    cout << "1- Booking Confirmation\n";
+    cout << "2- Trip Customization\n";
+    cout << "0- Exit\n";
+    cout << "Enter your choice: ";
+
+    int choice;
+    cin >> choice;
+
+    switch (choice) {
+    case 1:
+        BookingConfirmation();
+        break;
+    case 2:
+        TripCustomization();
+        break;
+    case 0:
+        cout << "Exiting the program. Goodbye!\n";
+        exit(0);
+    default:
+        cout << "Invalid choice. Please enter a valid option.\n";
+    }
+}
 void guideAndTransportationPlanning() {
     TourProgramManagement tourManager;  // TourProgramManagement sınıfından bir nesne oluşturuyoruz.
 
@@ -206,6 +265,13 @@ void guideAndTransportationPlanning() {
         }
     } while (choice != 4);
 }
+
+
+
+
+
+
+
 int main() {
     int choice;
     do {
