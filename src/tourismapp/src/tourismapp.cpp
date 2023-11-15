@@ -58,63 +58,86 @@ int tourProgramManagementMenu() {
     } while (choice != 0);
     return 0;
 }
+//***************************************************************************
+
+int addNode(std::vector<std::string>& dataList, const std::string& data) {
+    dataList.push_back(data);
+    return dataList.size();
+}
+
+int printList(const std::vector<std::string>& dataList) {
+    for (const std::string& data : dataList) {
+        std::cout << data << std::endl;
+    }
+    return -2;
+}
+
+int sortList(std::vector<std::string>& dataList) {
+    std::sort(dataList.begin(), dataList.end());
+    return -2;
+}
+
 int reporting() {
-    DoubleLinkedList popularDestinationsList;
-    DoubleLinkedList seasonalTrendsList;
-    DoubleLinkedList clientFeedbackList;
+    std::vector<std::string> popularDestinationsList;
+    std::vector<std::string> seasonalTrendsList;
+    std::vector<std::string> clientFeedbackList;
 
     while (true) {
-        cout << "Reporting Menu\n";
-        cout << "1. Popular Destinations\n";
-        cout << "2. Seasonal Trends\n";
-        cout << "3. Client Feedback\n";
-        cout << "0. Back to Main Menu\n";
+        std::cout << "Reporting Menu\n";
+        std::cout << "1. Popular Destinations\n";
+        std::cout << "2. Seasonal Trends\n";
+        std::cout << "3. Client Feedback\n";
+        std::cout << "0. Back to Main Menu\n";
 
         int choice;
-        cout << "Please Select: ";
-        cin >> choice;
+        std::cout << "Please Select: ";
+        std::cin >> choice;
 
         switch (choice) {
         case 1:
             // Popular Destinations
-            popularDestinationsList.addNode("Mugla");
-            popularDestinationsList.addNode("Mersin");
-            popularDestinationsList.addNode("Nevsehir");
-            popularDestinationsList.addNode("Antalya");
-            popularDestinationsList.addNode("Kayseri");
-            popularDestinationsList.addNode("Trabzon");
+            addNode(popularDestinationsList, "Mugla");
+            addNode(popularDestinationsList, "Mersin");
+            addNode(popularDestinationsList, "Nevsehir");
+            addNode(popularDestinationsList, "Antalya");
+            addNode(popularDestinationsList, "Kayseri");
+            addNode(popularDestinationsList, "Trabzon");
 
-            popularDestinationsList.printList();
+            sortList(popularDestinationsList);
+            printList(popularDestinationsList);
             break;
         case 2:
             // Seasonal Trends
-            seasonalTrendsList.addNode("Ski");
-            seasonalTrendsList.addNode("Baloon");
-            seasonalTrendsList.addNode("SnowBoard");
-            seasonalTrendsList.addNode("IceSkate");
-            seasonalTrendsList.addNode("Doing the homework given by professor Ugur");
+            addNode(seasonalTrendsList, "Ski");
+            addNode(seasonalTrendsList, "Balloon");
+            addNode(seasonalTrendsList, "SnowBoard");
+            addNode(seasonalTrendsList, "IceSkate");
+            addNode(seasonalTrendsList, "Doing the homework given by professor Ugur");
 
-            seasonalTrendsList.printList();
+            sortList(seasonalTrendsList);
+            printList(seasonalTrendsList);
             break;
         case 3:
             // Client Feedback       
-            clientFeedbackList.addNode("Excellent service! The staff was very friendly and accommodating.");
-            clientFeedbackList.addNode(" We had an amazing time on the tour. The itinerary was well-planned.");
-            clientFeedbackList.addNode("The tour package offered great value for the money.");
-            clientFeedbackList.addNode("The transportation arrangements were convenient and comfortable.");
-            clientFeedbackList.addNode("Knowledgeable guides made the trip informative and enjoyable.");
-            clientFeedbackList.addNode("The variety of activities provided a well-rounded experience");
-            clientFeedbackList.printList();
+            addNode(clientFeedbackList, "Excellent service! The staff was very friendly and accommodating.");
+            addNode(clientFeedbackList, "We had an amazing time on the tour. The itinerary was well-planned.");
+            addNode(clientFeedbackList, "The tour package offered great value for the money.");
+            addNode(clientFeedbackList, "The transportation arrangements were convenient and comfortable.");
+            addNode(clientFeedbackList, "Knowledgeable guides made the trip informative and enjoyable.");
+            addNode(clientFeedbackList, "The variety of activities provided a well-rounded experience");
+
+            sortList(clientFeedbackList);
+            printList(clientFeedbackList);
             break;
         case 0:
             // Ana Menüye Dön
             return 0;
         default:
-            cout << "Invalid selection!\n";
+            std::cout << "Invalid selection!\n";
         }
-        
     }
 }
+//***********************************************************************************************
 int vehicleAssignmentsMenu(TourProgramManagement& tourManager) {
     int vehicleChoice;
 
