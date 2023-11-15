@@ -6,6 +6,7 @@
 #include <fstream>
 #include <stack>
 #include <queue>
+#include <map>
 using namespace std;
 
 using namespace Coruh::Tourism;
@@ -58,7 +59,7 @@ public:
         }
         return tours;
     }
-    void Itineraries() {
+    int Itineraries() {
         // Tur adlarını ekrana yaz
         cout << "Available Tours:\n";
         for (size_t i = 0; i < tours.size(); ++i) {
@@ -76,7 +77,7 @@ public:
         // Hatalı bir seçim yapıldıysa uyarı ver ve fonksiyondan çık
         if (tourIndex < 0 || tourIndex >= tours.size()) {
             cout << "Invalid choice. Itinerary view failed.\n";
-            return;
+            return 0;
         }
 
         // Kullanıcıdan güzergahı al
@@ -98,8 +99,9 @@ public:
         else {
             cerr << "Failed to open the file for writing.\n";
         }
+        return 2;
     }
-    void vehicleAssignments() {
+    int vehicleAssignments() {
         int choice;
 
         do {
@@ -130,9 +132,10 @@ public:
             }
 
         } while (choice != 0);
+        return 0;
     }
 
-    void addVehicle() {
+    int addVehicle() {
         string brand, licensePlate;
         int year, kms;
 
@@ -163,9 +166,10 @@ public:
         else {
             cerr << "Failed to open the file for writing.\n";
         }
+        return 0;
     }
     //*****************************************************************************
-    void tripAssignments() {
+    int tripAssignments() {
         int choice;
 
         do {
@@ -196,9 +200,10 @@ public:
             }
 
         } while (choice != 0);
+        return -2;
     }
 
-    void addTrip() {
+    int addTrip() {
         string name;
         int price;
 
@@ -227,12 +232,13 @@ public:
         else {
             cerr << "Failed to open the file for writing.\n";
         }
+        return -2;
     }
 
-    void assignToTrip() {
+    int assignToTrip() {
         if (tours.empty()) {
             cout << "No tours available for assignment.\n";
-            return;
+            return 0;
         }
 
         // Display available tours
@@ -249,7 +255,7 @@ public:
         // Validate tour choice
         if (tourChoice < 1 || tourChoice > static_cast<int>(tours.size())) {
             cout << "Invalid choice. Assignment failed.\n";
-            return;
+            return 0;
         }
 
         // Ignore the newline character left in the buffer
@@ -270,7 +276,7 @@ public:
         // Validate customer choice
         if (tripChoice < 1 || tripChoice > static_cast<int>(trips.size())) {
             cout << "Invalid choice. Assignment failed.\n";
-            return;
+            return 0;
         }
 
         // Create and save assignment record
@@ -285,6 +291,7 @@ public:
         else {
             cerr << "Failed to open the file for writing.\n";
         }
+        return 0;
     }
 
 
@@ -307,7 +314,7 @@ public:
     }
     //***********************************************************************+
 
-    void customerAssignments() {
+    int customerAssignments() {
         int choice;
 
         do {
@@ -338,10 +345,11 @@ public:
             }
 
         } while (choice != 0);
+        return 0;
     }
 
 
-    void addCustomer() {
+    int addCustomer() {
         string name, surname, sex;
         int year, id;
 
@@ -375,6 +383,7 @@ public:
         else {
             cerr << "Failed to open the file for writing.\n";
         }
+        return -2;
     }
 
 
@@ -382,10 +391,10 @@ public:
 
 
 
-    void assignToCustomer() {
+    int assignToCustomer() {
     if (tours.empty()) {
         cout << "No tours available for assignment.\n";
-        return;
+        return 0;
     }
 
     // Display available tours
@@ -402,12 +411,12 @@ public:
     // Validate tour choice
     if (tourChoice < 1 || tourChoice > static_cast<int>(tours.size())) {
         cout << "Invalid choice. Assignment failed.\n";
-        return;
+        return 0;
     }
 
     // Ignore the newline character left in the buffer
     cin.ignore();
-
+    
     // Display available customers
     vector<string> customers = getAvailableCustomers();
     cout << "Customers:\n";
@@ -423,14 +432,14 @@ public:
     // Validate customer choice
     if (customerChoice < 1 || customerChoice > static_cast<int>(customers.size())) {
         cout << "Invalid choice. Assignment failed.\n";
-        return;
+        return 0;
     }
 
     // Create and save assignment record
     ofstream outFile("tourandcustomer.txt", ios::app);
     if (outFile.is_open()) {
         outFile << "Tour: " << tours[tourChoice - 1].name << endl;
-        outFile << "Customer: " << customers[customerChoice - 1] << endl;
+        outFile << "Customer:" << customers[customerChoice - 1] << endl;
         outFile << "-------------------------\n";
         outFile.close();
         cout << "Assignment has been made.\n";
@@ -438,6 +447,7 @@ public:
     else {
         cerr << "Failed to open the file for writing.\n";
     }
+    return 0;
 }
 
 
@@ -461,10 +471,10 @@ public:
 
     //***********************************************************
 
-    void assignToVehicle() {
+    int assignToVehicle() {
         if (tours.empty()) {
             cout << "No tours available for assignment.\n";
-            return;
+            return 0;
         }
 
         // Display available tours
@@ -481,7 +491,7 @@ public:
         // Validate tour choice
         if (tourChoice < 1 || tourChoice > static_cast<int>(tours.size())) {
             cout << "Invalid choice. Assignment failed.\n";
-            return;
+            return 0;
         }
 
         // Display available vehicles
@@ -499,7 +509,7 @@ public:
         // Validate vehicle choice
         if (vehicleChoice < 1 || vehicleChoice > static_cast<int>(vehicles.size())) {
             cout << "Invalid choice. Assignment failed.\n";
-            return;
+            return 0;
         }
 
         // Create and save assignment record
@@ -514,6 +524,7 @@ public:
         else {
             cerr << "Failed to open the file for writing.\n";
         }
+        return -2;
     }
 
     vector<string> getAvailableVehicles() {
@@ -546,7 +557,7 @@ public:
 
 
 
-    void guideRecords() {
+    int guideRecords() {
         int choice;
 
         do {
@@ -577,9 +588,10 @@ public:
             }
 
         } while (choice != 0);
+        return 0;
     }
 
-    void addGuide() {
+    int addGuide() {
         string name, surname, sex;
         int old, experience;
 
@@ -606,18 +618,20 @@ public:
             outFile << "-------------------------\n";
             outFile.close();
             cout << "Guide has been added.\n";
+            return 0;
         }
         else {
             cerr << "Failed to open the file for writing.\n";
         }
+        return 0;
     }
 
 
 
-    void assignToGuide() {
+    int assignToGuide() {
         if (tours.empty()) {
             cout << "No tours available for assignment.\n";
-            return;
+            return 0;
         }
 
         // Display available tours
@@ -634,7 +648,7 @@ public:
         // Validate tour choice
         if (tourChoice < 1 || tourChoice > static_cast<int>(tours.size())) {
             cout << "Invalid choice. Assignment failed.\n";
-            return;
+            return 0;
         }
 
         // Display available guides
@@ -652,7 +666,7 @@ public:
         // Validate guide choice
         if (guideChoice < 1 || guideChoice > static_cast<int>(guides.size())) {
             cout << "Invalid choice. Assignment failed.\n";
-            return;
+            return 0;
         }
 
         // Create and save assignment record
@@ -665,10 +679,12 @@ public:
             outFile << "-------------------------\n";
             outFile.close();
             cout << "Assignment has been made.\n";
+            return 0;
         }
         else {
             cerr << "Failed to open the file for writing.\n";
         }
+        return -2;
     }
 
     string getGuideDetails(const string& guideName) {
@@ -723,7 +739,7 @@ public:
 
 
 
-    void AddTour() {
+    int AddTour() {
         Tour newTour;
 
         cout << "Enter the tour name: ";
@@ -745,10 +761,11 @@ public:
 
         cout << "Added tour: " << newTour.name << endl;
         SaveToursToFile(tours, "tours.txt");
+        return 0;
     }
 
 
-    void SaveToursToFile(const vector<Tour>& tours, const string& fileName) {
+    int SaveToursToFile(const vector<Tour>& tours, const string& fileName) {
     ofstream file(fileName);
     if (file.is_open()) {
         for (const Tour& tour : tours) {
@@ -765,17 +782,18 @@ public:
     else {
         cerr << "Failed to open the file for writing." << endl;
     }
+    return -2;
 }
 
 
-    void UpdateTour() {
+    int UpdateTour() {
         int index;
         string newName, newDestination, newActivity;
         double newPrice;
 
         if (tours.empty()) {
             cout << "No tours to update." << endl;
-            return;
+            return 0;
         }
 
         cout << "Select a tour to update:" << endl;
@@ -822,12 +840,13 @@ public:
         else {
             cout << "Invalid choice. Update failed." << endl;
         }
+        return 0;
     }
 
-    void DeleteTour() {
+    int DeleteTour() {
         if (tours.empty()) {
             cout << "No tours to delete." << endl;
-            return;
+            return 0;
         }
 
         cout << "Tours:\n";
@@ -849,9 +868,10 @@ public:
         else {
             cout << "Invalid choice. Deletion failed." << endl;
         }
+        return -2;
     }
 
-    void CategorizeByDestination() {
+    int CategorizeByDestination() {
         cout << "Destinations:\n";
         for (const Tour& tour : tours) {
             cout << "-----------------------------------" << endl;
@@ -861,11 +881,12 @@ public:
             cout << "Tour Price : " << tour.price << endl;
 
         }
+        return 0;
 
 
     }
 
-    void CategorizeByActivity() {
+    int CategorizeByActivity() {
         cout << "Activities:\n";
         for (const Tour& tour : tours) {
             cout << "-----------------------------------" << endl;
@@ -875,6 +896,7 @@ public:
             cout << "Tour Price : " << tour.price << endl;
 
         }
+        return 0;
     }
 };
 
@@ -883,10 +905,74 @@ public:
 
 
 
+double convertCurrency(double amount, double exchangeRate) {
+    return amount * exchangeRate;
+}
+
+int currencyConversionMenu() {
+    // Exchange rates
+    map<string, double> exchangeRates = {
+        {"USD", 1.0},         // US Dollar
+        {"EUR", 0.85},        // Euro
+        {"CNY", 6.43},        // Chinese Yuan
+        {"JPY", 114.41},      // Japanese Yen
+        {"CHF", 0.92},        // Swiss Franc
+        {"TRY", 28.67}         // Turkish Lira (example rate)
+        // You can add more currency types as needed
+    };
+
+    cout << "Choose the source currency:\n";
+    for (const auto& entry : exchangeRates) {
+        cout << entry.first << endl;
+    }
+
+    string sourceCurrency;
+    cout << "Enter the source currency code: ";
+    cin >> sourceCurrency;
+
+    // Convert currency code to uppercase
+    for (auto& c : sourceCurrency) {
+        c = toupper(c);
+    }
+
+    auto sourceIt = exchangeRates.find(sourceCurrency);
+    if (sourceIt == exchangeRates.end()) {
+        cout << "Invalid source currency code." << endl;
+        return 0;
+    }
+
+    cout << "Enter the amount in " << sourceCurrency << ": ";
+    double amount;
+    cin >> amount;
+
+    cout << "Choose the target currency:\n";
+    for (const auto& entry : exchangeRates) {
+        cout << entry.first << endl;
+    }
+
+    string targetCurrency;
+    cout << "Enter the target currency code: ";
+    cin >> targetCurrency;
+
+    // Convert currency code to uppercase
+    for (auto& c : targetCurrency) {
+        c = toupper(c);
+    }
+
+    auto targetIt = exchangeRates.find(targetCurrency);
+    if (targetIt == exchangeRates.end()) {
+        cout << "Invalid target currency code." << endl;
+        return 0;
+    }
+
+    double convertedAmount = convertCurrency(amount, targetIt->second / sourceIt->second);
+    cout << amount << " " << sourceCurrency << " = " << convertedAmount << " " << targetCurrency << endl;
+
+    return 0;
+}
 
 
-
-void printPopularDestinations(stack<string>& destinationStack, queue<string>& destinationQueue) {
+int printPopularDestinations(stack<string>& destinationStack, queue<string>& destinationQueue) {
     cout << "Popular Destinations (Stack):\n";
     while (!destinationStack.empty()) {
         cout << destinationStack.top() << endl;
@@ -898,7 +984,9 @@ void printPopularDestinations(stack<string>& destinationStack, queue<string>& de
         cout << destinationQueue.front() << endl;
         destinationQueue.pop();
     }
+    return -2;
 }
+
 
 
 
@@ -945,10 +1033,12 @@ public:
             ++index;
         }
     }
+
+
+    
+
+
+
 };
 
 
-void integrations() {
-    cout << "Integrations Menu\n";
-
-}

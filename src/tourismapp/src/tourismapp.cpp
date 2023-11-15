@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <map>
 #include "../../tourism/src/tourism.cpp"
 using namespace std;
 
@@ -17,7 +18,7 @@ void printArt() {
     cout << endl;
 
 }
-void tourProgramManagementMenu() {
+int tourProgramManagementMenu() {
     TourProgramManagement tourManager;
     int choice;
     do {
@@ -55,8 +56,9 @@ void tourProgramManagementMenu() {
             break;
         }
     } while (choice != 0);
+    return 0;
 }
-void reporting() {
+int reporting() {
     DoubleLinkedList popularDestinationsList;
     DoubleLinkedList seasonalTrendsList;
     DoubleLinkedList clientFeedbackList;
@@ -106,13 +108,14 @@ void reporting() {
             break;
         case 0:
             // Ana Menüye Dön
-            return;
+            return 0;
         default:
             cout << "Invalid selection!\n";
         }
+        
     }
 }
-void vehicleAssignmentsMenu(TourProgramManagement& tourManager) {
+int vehicleAssignmentsMenu(TourProgramManagement& tourManager) {
     int vehicleChoice;
 
     do {
@@ -141,8 +144,9 @@ void vehicleAssignmentsMenu(TourProgramManagement& tourManager) {
             break;
         }
     } while (vehicleChoice != 0);
+    return -2;
 }
-void guideAssignmentsMenu(TourProgramManagement& tourManager) {
+int guideAssignmentsMenu(TourProgramManagement& tourManager) {
     int guideChoice;
 
     do {
@@ -171,11 +175,12 @@ void guideAssignmentsMenu(TourProgramManagement& tourManager) {
             break;
         }
     } while (guideChoice != 0);
+    return -2;
 }
 
 
 
-void guideAndTransportationPlanning() {
+int guideAndTransportationPlanning() {
     TourProgramManagement tourManager;  // TourProgramManagement sınıfından bir nesne oluşturuyoruz.
 
     int choice;
@@ -184,11 +189,14 @@ void guideAndTransportationPlanning() {
         cout << "1-Itineraries\n";
         cout << "2-Vehicle Assignments\n";
         cout << "3-Guide Training Records\n";
-        cout << "4-Back to Main Menu\n";
+        cout << "0-Back to Main Menu\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
         switch (choice) {
+        case 0:
+            cout << "Returning to the main menu...\n";
+            break;
         case 1:
             tourManager.Itineraries();
             break;
@@ -200,14 +208,13 @@ void guideAndTransportationPlanning() {
             // Guide Training Records işlemleri eklenecek (istenildiğinde).
             guideAssignmentsMenu(tourManager);
             break;
-        case 4:
-            cout << "Returning to the main menu...\n";
-            break;
+       
         default:
             cout << "Invalid choice. Please try again.\n";
             break;
         }
-    } while (choice != 4);
+    } while (choice != 0);
+    return 0;
 }
 
 
@@ -219,7 +226,7 @@ void guideAndTransportationPlanning() {
 
 
 
-void customerAssignmentsMenu(TourProgramManagement& tourManager) {
+int customerAssignmentsMenu(TourProgramManagement& tourManager) {
     int customerChoice;
 
     do {
@@ -248,10 +255,11 @@ void customerAssignmentsMenu(TourProgramManagement& tourManager) {
             break;
         }
     } while (customerChoice != 0);
+    return 0;
 }
 
 
-void tripAssignmentsMenu(TourProgramManagement& tourManager) {
+int tripAssignmentsMenu(TourProgramManagement& tourManager) {
     int tripChoice;
 
     do {
@@ -280,8 +288,9 @@ void tripAssignmentsMenu(TourProgramManagement& tourManager) {
             break;
         }
     } while (tripChoice != 0);
+    return 0;
 }
-void clientReservationAndPaymentTracking() {
+int clientReservationAndPaymentTracking() {
     TourProgramManagement tourManager;  // TourProgramManagement sınıfından bir nesne oluşturuyoruz.
 
     int choice;
@@ -289,12 +298,15 @@ void clientReservationAndPaymentTracking() {
         cout << "Client Reservation And Payment Tracking Menu\n";
         cout << "1-Booking Confirmations\n";
         cout << "2-Trip Customization \n";
-        cout << "Goood Luck\n";
-        cout << "4-Back to Main Menu\n";
+        
+        cout << "0-Back to Main Menu\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
         switch (choice) {
+        case 0:
+            cout << "Returning to the main menu...\n";
+            break;
         case 1:
             customerAssignmentsMenu(tourManager);
             
@@ -303,23 +315,41 @@ void clientReservationAndPaymentTracking() {
             // Vehicle Assignments işlemleri eklenecek (istenildiğinde).
             tripAssignmentsMenu(tourManager);
             break;
-        case 3:
-            // Guide Training Records işlemleri eklenecek (istenildiğinde).
-            cout << "Good Luck...\n";
-            break;
-        case 4:
-            cout << "Returning to the main menu...\n";
-            break;
+       
+        
         default:
             cout << "Invalid choice. Please try again.\n";
             break;
         }
-    } while (choice != 4);
+    } while (choice != 0);
+    return -2;
 }
 
 //*************************************************************************************
 
+int integrations() {
+    cout << "Integrations Menu\n";
+    int choice;
+    do {
+        cout << "1- Currency Conversion\n";
+        cout << "0- Return to Main Menu\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
 
+        switch (choice) {
+        case 1:
+            currencyConversionMenu();
+            break;
+        case 0:
+            cout << "Returning to the Main Menu.\n";
+            break;
+        default:
+            cout << "Invalid choice. Please enter a valid option.\n";
+            break;
+        }
+    } while (choice != 0);
+    return -2;
+}
 
 
 
