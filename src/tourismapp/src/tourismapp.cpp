@@ -380,8 +380,12 @@ int integrations() {
 
 
 int main() {
+
     int choice;
     do {
+      
+            
+            
         printArt();
         cout << "Tourism and Travel Agency Automation\n";
         cout << "1. Tour and Package Program Management\n";

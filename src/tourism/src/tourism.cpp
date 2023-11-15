@@ -9,12 +9,13 @@
 #include <map>
 #include <unordered_map>
 #include <sstream>
+#include <algorithm> // for std::transform
 using namespace std;
 
 using namespace Coruh::Tourism;
 
 class TourProgramManagement {
-private:
+public:
     struct Tour {
         string name;
         string destination;
@@ -23,9 +24,7 @@ private:
         int numberOfPeople; // New field for the number of people
     };
 
-
     vector<Tour> tours;
-
 
 public:
     TourProgramManagement() {
@@ -284,7 +283,7 @@ public:
         return 0;
     }
 
-
+    
     int addCustomer() {
         string name, surname, sex;
         int year, id;
