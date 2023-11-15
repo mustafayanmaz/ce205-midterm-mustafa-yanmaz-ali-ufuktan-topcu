@@ -7,6 +7,8 @@
 #include <stack>
 #include <queue>
 #include <map>
+#include <unordered_map>
+#include <sstream>
 using namespace std;
 
 using namespace Coruh::Tourism;
@@ -101,73 +103,7 @@ public:
         }
         return 2;
     }
-    int vehicleAssignments() {
-        int choice;
 
-        do {
-            cout << "\nVehicle Assignments Menu:\n";
-            cout << "1- Add Vehicle\n";
-            cout << "2- Assign to Vehicle\n";
-            cout << "0- Return to Guide and Transportation Menu\n";
-            cout << "Enter your choice: ";
-            cin >> choice;
-
-            switch (choice) {
-            case 1:
-                addVehicle();
-                break;
-
-            case 2:
-                assignToVehicle();
-                break;
-
-            case 0:
-                // Return to Guide and Transportation Menu
-                cout << "Returning to Guide and Transportation Menu.\n";
-                break;
-
-            default:
-                cout << "Invalid choice. Please enter a valid option.\n";
-                break;
-            }
-
-        } while (choice != 0);
-        return 0;
-    }
-
-    int addVehicle() {
-        string brand, licensePlate;
-        int year, kms;
-
-        cout << "Enter the vehicle brand: ";
-        cin >> brand;
-
-        cout << "Enter the vehicle year: ";
-        cin >> year;
-
-        cout << "Enter the vehicle kilometers: ";
-        cin >> kms;
-
-        cin.ignore();  // Ignore the newline character left in the buffer
-
-        cout << "Enter the vehicle license plate: ";
-        getline(cin, licensePlate);  // Read the entire line, including spaces
-
-        ofstream outFile("vehicle.txt", ios::app);
-        if (outFile.is_open()) {
-            outFile << "Brand: " << brand << endl;
-            outFile << "Year: " << year << endl;
-            outFile << "Kilometers: " << kms << endl;
-            outFile << "License Plate: " << licensePlate << endl;
-            outFile << "-------------------------\n";
-            outFile.close();
-            cout << "Vehicle has been added.\n";
-        }
-        else {
-            cerr << "Failed to open the file for writing.\n";
-        }
-        return 0;
-    }
     //*****************************************************************************
     int tripAssignments() {
         int choice;
@@ -211,20 +147,20 @@ public:
         cin.ignore();  // Ignore the newline character left in the buffer
         getline(cin, name);  // Read the entire line, including spaces
 
-        
 
-        
+
+
 
         cout << "Enter the Customer Price: ";
         cin >> price;
 
-        
+
 
         ofstream outFile("trip.txt", ios::app);
         if (outFile.is_open()) {
             outFile << "Name: " << name << endl;
             outFile << "Price: " << price << endl;
-            
+
             outFile << "-------------------------\n";
             outFile.close();
             cout << "Trip has been added.\n";
@@ -392,63 +328,63 @@ public:
 
 
     int assignToCustomer() {
-    if (tours.empty()) {
-        cout << "No tours available for assignment.\n";
+        if (tours.empty()) {
+            cout << "No tours available for assignment.\n";
+            return 0;
+        }
+
+        // Display available tours
+        cout << "Available Tours:\n";
+        for (size_t i = 0; i < tours.size(); ++i) {
+            cout << i + 1 << "-" << tours[i].name << endl;
+        }
+
+        // Get user's choice
+        int tourChoice;
+        cout << "Enter the number of the tour to assign a customer: ";
+        cin >> tourChoice;
+
+        // Validate tour choice
+        if (tourChoice < 1 || tourChoice > static_cast<int>(tours.size())) {
+            cout << "Invalid choice. Assignment failed.\n";
+            return 0;
+        }
+
+        // Ignore the newline character left in the buffer
+        cin.ignore();
+
+        // Display available customers
+        vector<string> customers = getAvailableCustomers();
+        cout << "Customers:\n";
+        for (size_t i = 0; i < customers.size(); ++i) {
+            cout << i + 1 << "-" << customers[i] << endl;
+        }
+
+        // Get user's choice for customer
+        int customerChoice;
+        cout << "Enter the number of the customer to assign to the tour: ";
+        cin >> customerChoice;
+
+        // Validate customer choice
+        if (customerChoice < 1 || customerChoice > static_cast<int>(customers.size())) {
+            cout << "Invalid choice. Assignment failed.\n";
+            return 0;
+        }
+
+        // Create and save assignment record
+        ofstream outFile("tourandcustomer.txt", ios::app);
+        if (outFile.is_open()) {
+            outFile << "Tour: " << tours[tourChoice - 1].name << endl;
+            outFile << "Customer:" << customers[customerChoice - 1] << endl;
+            outFile << "-------------------------\n";
+            outFile.close();
+            cout << "Assignment has been made.\n";
+        }
+        else {
+            cerr << "Failed to open the file for writing.\n";
+        }
         return 0;
     }
-
-    // Display available tours
-    cout << "Available Tours:\n";
-    for (size_t i = 0; i < tours.size(); ++i) {
-        cout << i + 1 << "-" << tours[i].name << endl;
-    }
-
-    // Get user's choice
-    int tourChoice;
-    cout << "Enter the number of the tour to assign a customer: ";
-    cin >> tourChoice;
-
-    // Validate tour choice
-    if (tourChoice < 1 || tourChoice > static_cast<int>(tours.size())) {
-        cout << "Invalid choice. Assignment failed.\n";
-        return 0;
-    }
-
-    // Ignore the newline character left in the buffer
-    cin.ignore();
-    
-    // Display available customers
-    vector<string> customers = getAvailableCustomers();
-    cout << "Customers:\n";
-    for (size_t i = 0; i < customers.size(); ++i) {
-        cout << i + 1 << "-" << customers[i] << endl;
-    }
-
-    // Get user's choice for customer
-    int customerChoice;
-    cout << "Enter the number of the customer to assign to the tour: ";
-    cin >> customerChoice;
-
-    // Validate customer choice
-    if (customerChoice < 1 || customerChoice > static_cast<int>(customers.size())) {
-        cout << "Invalid choice. Assignment failed.\n";
-        return 0;
-    }
-
-    // Create and save assignment record
-    ofstream outFile("tourandcustomer.txt", ios::app);
-    if (outFile.is_open()) {
-        outFile << "Tour: " << tours[tourChoice - 1].name << endl;
-        outFile << "Customer:" << customers[customerChoice - 1] << endl;
-        outFile << "-------------------------\n";
-        outFile.close();
-        cout << "Assignment has been made.\n";
-    }
-    else {
-        cerr << "Failed to open the file for writing.\n";
-    }
-    return 0;
-}
 
 
     vector<string> getAvailableCustomers() {
@@ -469,7 +405,137 @@ public:
         return customers;
     }
 
+
+
+
+    // Basit bir hash table benzeri veri yapısı
+    using CustomerHashTable = unordered_map<string, string>;
+
+    int insertToHashTable(CustomerHashTable& table, const string& key, const string& value) {
+        // ID, Name, Surname, Gender, Age bilgilerini almak için stringstream kullanılır
+        istringstream iss(value);
+        string id, name, surname, gender, age;
+
+        while (iss >> id >> name >> surname >> gender >> age) {
+            // Hash tablosuna ekle
+            table[key] = "ID: " + id + "\nName: " + name + "\nSurname: " + surname + "\nGender: " + gender + "\nAge: " + age;
+        }
+        return -2;
+    }
+
+
+
+
+
+
+    int displayHashTable(const CustomerHashTable& table) {
+        for (const auto& entry : table) {
+            cout << "Customer ID: " << entry.first << "\n" << entry.second << "\n-------------------------\n";
+        }
+        return -2;
+    }
+
+    int displayCustomers() {
+        CustomerHashTable customerTable;
+        cout << "Customer List:\n";
+
+        ifstream file("customer.txt");
+        if (file.is_open()) {
+            string line;
+            string currentCustomerID;
+
+            while (getline(file, line)) {
+                cout << " " << line << endl;  // Debug amaçlı, bu satırı ekleyin
+
+                if (line.find("ID: ") == 0) {
+                    currentCustomerID = line.substr(4);
+                    // Debug amaçlı, bu satırı ekleyin
+                }
+                else {
+                    insertToHashTable(customerTable, currentCustomerID, line);
+                }
+            }
+
+            file.close();
+
+
+            displayHashTable(customerTable);
+        }
+        else {
+            cerr << "Failed to open the file for reading.\n";
+        }
+        return -2;
+    }
+
+
     //***********************************************************
+    int vehicleAssignments() {
+        int choice;
+
+        do {
+            cout << "\nVehicle Assignments Menu:\n";
+            cout << "1- Add Vehicle\n";
+            cout << "2- Assign to Vehicle\n";
+            cout << "0- Return to Guide and Transportation Menu\n";
+            cout << "Enter your choice: ";
+            cin >> choice;
+
+            switch (choice) {
+            case 1:
+                addVehicle();
+                break;
+
+            case 2:
+                assignToVehicle();
+                break;
+
+            case 0:
+                // Return to Guide and Transportation Menu
+                cout << "Returning to Guide and Transportation Menu.\n";
+                break;
+
+            default:
+                cout << "Invalid choice. Please enter a valid option.\n";
+                break;
+            }
+
+        } while (choice != 0);
+        return 0;
+    }
+
+    int addVehicle() {
+        string brand, licensePlate;
+        int year, kms;
+
+        cout << "Enter the vehicle brand: ";
+        cin >> brand;
+
+        cout << "Enter the vehicle year: ";
+        cin >> year;
+
+        cout << "Enter the vehicle kilometers: ";
+        cin >> kms;
+
+        cin.ignore();  // Ignore the newline character left in the buffer
+
+        cout << "Enter the vehicle license plate: ";
+        getline(cin, licensePlate);  // Read the entire line, including spaces
+
+        ofstream outFile("vehicle.txt", ios::app);
+        if (outFile.is_open()) {
+            outFile << "Brand: " << brand << endl;
+            outFile << "Year: " << year << endl;
+            outFile << "Kilometers: " << kms << endl;
+            outFile << "License Plate: " << licensePlate << endl;
+            outFile << "-------------------------\n";
+            outFile.close();
+            cout << "Vehicle has been added.\n";
+        }
+        else {
+            cerr << "Failed to open the file for writing.\n";
+        }
+        return 0;
+    }
 
     int assignToVehicle() {
         if (tours.empty()) {
@@ -549,7 +615,7 @@ public:
 
 
 
-
+    //************************************************************************
 
 
 
@@ -735,7 +801,7 @@ public:
     }
 
 
-
+    //***********************************************************************
 
 
 
@@ -766,24 +832,24 @@ public:
 
 
     int SaveToursToFile(const vector<Tour>& tours, const string& fileName) {
-    ofstream file(fileName);
-    if (file.is_open()) {
-        for (const Tour& tour : tours) {
-            file << "Name: " << tour.name << endl;
-            file << "Destination: " << tour.destination << endl;
-            file << "Activity: " << tour.activity << endl;
-            file << "Price: " << tour.price << endl;
-            file << "Number of People: " << tour.numberOfPeople << endl; // Include number of people
-            file << endl;
+        ofstream file(fileName);
+        if (file.is_open()) {
+            for (const Tour& tour : tours) {
+                file << "Name: " << tour.name << endl;
+                file << "Destination: " << tour.destination << endl;
+                file << "Activity: " << tour.activity << endl;
+                file << "Price: " << tour.price << endl;
+                file << "Number of People: " << tour.numberOfPeople << endl; // Include number of people
+                file << endl;
+            }
+            file.close();
+            cout << "Tours have been saved to '" << fileName << "'." << endl;
         }
-        file.close();
-        cout << "Tours have been saved to '" << fileName << "'." << endl;
+        else {
+            cerr << "Failed to open the file for writing." << endl;
+        }
+        return -2;
     }
-    else {
-        cerr << "Failed to open the file for writing." << endl;
-    }
-    return -2;
-}
 
 
     int UpdateTour() {
@@ -1035,10 +1101,8 @@ public:
     }
 
 
-    
+
 
 
 
 };
-
-

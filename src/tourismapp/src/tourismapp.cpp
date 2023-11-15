@@ -96,35 +96,35 @@ int reporting() {
         switch (choice) {
         case 1:
             // Popular Destinations
-            addNode(popularDestinationsList, "Mugla");
-            addNode(popularDestinationsList, "Mersin");
-            addNode(popularDestinationsList, "Nevsehir");
-            addNode(popularDestinationsList, "Antalya");
-            addNode(popularDestinationsList, "Kayseri");
-            addNode(popularDestinationsList, "Trabzon");
+            addNode(popularDestinationsList, "1-Mugla");
+            addNode(popularDestinationsList, "2-Mersin");
+            addNode(popularDestinationsList, "3-Nevsehir");
+            addNode(popularDestinationsList, "4-Antalya");
+            addNode(popularDestinationsList, "5-Kayseri");
+            addNode(popularDestinationsList, "6-Trabzon");
 
             sortList(popularDestinationsList);
             printList(popularDestinationsList);
             break;
         case 2:
             // Seasonal Trends
-            addNode(seasonalTrendsList, "Ski");
-            addNode(seasonalTrendsList, "Balloon");
-            addNode(seasonalTrendsList, "SnowBoard");
-            addNode(seasonalTrendsList, "IceSkate");
-            addNode(seasonalTrendsList, "Doing the homework given by professor Ugur");
+            addNode(seasonalTrendsList, "1-Ski");
+            addNode(seasonalTrendsList, "2-Balloon");
+            addNode(seasonalTrendsList, "3-SnowBoard");
+            addNode(seasonalTrendsList, "4-IceSkate");
+            addNode(seasonalTrendsList, "5-Doing the homework given by professor Ugur");
 
             sortList(seasonalTrendsList);
             printList(seasonalTrendsList);
             break;
         case 3:
             // Client Feedback       
-            addNode(clientFeedbackList, "Excellent service! The staff was very friendly and accommodating.");
-            addNode(clientFeedbackList, "We had an amazing time on the tour. The itinerary was well-planned.");
-            addNode(clientFeedbackList, "The tour package offered great value for the money.");
-            addNode(clientFeedbackList, "The transportation arrangements were convenient and comfortable.");
-            addNode(clientFeedbackList, "Knowledgeable guides made the trip informative and enjoyable.");
-            addNode(clientFeedbackList, "The variety of activities provided a well-rounded experience");
+            addNode(clientFeedbackList, "1-Excellent service! The staff was very friendly and accommodating.");
+            addNode(clientFeedbackList, "2-We had an amazing time on the tour. The itinerary was well-planned.");
+            addNode(clientFeedbackList, "3-The tour package offered great value for the money.");
+            addNode(clientFeedbackList, "4-The transportation arrangements were convenient and comfortable.");
+            addNode(clientFeedbackList, "5-Knowledgeable guides made the trip informative and enjoyable.");
+            addNode(clientFeedbackList, "6-The variety of activities provided a well-rounded experience");
 
             sortList(clientFeedbackList);
             printList(clientFeedbackList);
@@ -231,7 +231,7 @@ int guideAndTransportationPlanning() {
             // Guide Training Records işlemleri eklenecek (istenildiğinde).
             guideAssignmentsMenu(tourManager);
             break;
-       
+
         default:
             cout << "Invalid choice. Please try again.\n";
             break;
@@ -256,6 +256,7 @@ int customerAssignmentsMenu(TourProgramManagement& tourManager) {
         cout << "\nCustomer Assignments Menu:\n";
         cout << "1- Add Customer\n";
         cout << "2- Assign Customer to Tour\n";
+        cout << "3- List all Customers\n";
         cout << "0- Return to Client Reservation and Payment Tracking Menu\n";
         cout << "Enter your choice: ";
         cin >> customerChoice;
@@ -269,6 +270,8 @@ int customerAssignmentsMenu(TourProgramManagement& tourManager) {
             // Assign to Vehicle
             tourManager.assignToCustomer();
             break;
+        case 3:
+            tourManager.displayCustomers();
         case 0:
             // Return to Guide and Transportation Menu
             cout << "Returning to Guide and Transportation Menu.\n";
@@ -321,7 +324,7 @@ int clientReservationAndPaymentTracking() {
         cout << "Client Reservation And Payment Tracking Menu\n";
         cout << "1-Booking Confirmations\n";
         cout << "2-Trip Customization \n";
-        
+
         cout << "0-Back to Main Menu\n";
         cout << "Enter your choice: ";
         cin >> choice;
@@ -332,14 +335,14 @@ int clientReservationAndPaymentTracking() {
             break;
         case 1:
             customerAssignmentsMenu(tourManager);
-            
+
             break;
         case 2:
             // Vehicle Assignments işlemleri eklenecek (istenildiğinde).
             tripAssignmentsMenu(tourManager);
             break;
-       
-        
+
+
         default:
             cout << "Invalid choice. Please try again.\n";
             break;
