@@ -18,6 +18,8 @@ void printArt() {
     cout << endl;
 
 }
+
+//Menu 1
 int tourProgramManagementMenu() {
     TourProgramManagement tourManager;
     int choice;
@@ -60,6 +62,8 @@ int tourProgramManagementMenu() {
 }
 //***************************************************************************
 
+//Menu 4
+//heap and sort used
 int addNode(std::vector<std::string>& dataList, const std::string& data) {
     dataList.push_back(data);
     return dataList.size();
@@ -138,114 +142,9 @@ int reporting() {
     }
 }
 //***********************************************************************************************
-int vehicleAssignmentsMenu(TourProgramManagement& tourManager) {
-    int vehicleChoice;
 
-    do {
-        cout << "\nVehicle Assignments Menu:\n";
-        cout << "1- Add Vehicle\n";
-        cout << "2- Assign to Vehicle\n";
-        cout << "0- Return to Guide and Transportation Menu\n";
-        cout << "Enter your choice: ";
-        cin >> vehicleChoice;
+//Menu 2
 
-        switch (vehicleChoice) {
-        case 1:
-            // Add Vehicle
-            tourManager.addVehicle();
-            break;
-        case 2:
-            // Assign to Vehicle
-            tourManager.assignToVehicle();
-            break;
-        case 0:
-            // Return to Guide and Transportation Menu
-            cout << "Returning to Guide and Transportation Menu.\n";
-            break;
-        default:
-            cout << "Invalid choice. Please enter a valid option.\n";
-            break;
-        }
-    } while (vehicleChoice != 0);
-    return -2;
-}
-int guideAssignmentsMenu(TourProgramManagement& tourManager) {
-    int guideChoice;
-
-    do {
-        cout << "\nGuide and Trasnportation Records Menu:\n";
-        cout << "1- Add Guide\n";
-        cout << "2- Assign Guide to Tour\n";
-        cout << "0- Return to Guide and Transportation Menu\n";
-        cout << "Enter your choice: ";
-        cin >> guideChoice;
-
-        switch (guideChoice) {
-        case 1:
-            // Add Vehicle
-            tourManager.addGuide();
-            break;
-        case 2:
-            // Assign to Vehicle
-            tourManager.assignToGuide();
-            break;
-        case 0:
-            // Return to Guide and Transportation Menu
-            cout << "Returning to Guide and Transportation Menu.\n";
-            break;
-        default:
-            cout << "Invalid choice. Please enter a valid option.\n";
-            break;
-        }
-    } while (guideChoice != 0);
-    return -2;
-}
-
-
-
-int guideAndTransportationPlanning() {
-    TourProgramManagement tourManager;  // TourProgramManagement sınıfından bir nesne oluşturuyoruz.
-
-    int choice;
-    do {
-        cout << "Guide and Transportation Planning Menu\n";
-        cout << "1-Itineraries\n";
-        cout << "2-Vehicle Assignments\n";
-        cout << "3-Guide Training Records\n";
-        cout << "0-Back to Main Menu\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
-
-        switch (choice) {
-        case 0:
-            cout << "Returning to the main menu...\n";
-            break;
-        case 1:
-            tourManager.Itineraries();
-            break;
-        case 2:
-            // Vehicle Assignments işlemleri eklenecek (istenildiğinde).
-            vehicleAssignmentsMenu(tourManager);
-            break;
-        case 3:
-            // Guide Training Records işlemleri eklenecek (istenildiğinde).
-            guideAssignmentsMenu(tourManager);
-            break;
-
-        default:
-            cout << "Invalid choice. Please try again.\n";
-            break;
-        }
-    } while (choice != 0);
-    return 0;
-}
-
-
-
-
-
-
-//**************************************************************************************************
 
 
 
@@ -264,7 +163,7 @@ int customerAssignmentsMenu(TourProgramManagement& tourManager) {
         switch (customerChoice) {
         case 1:
             // Add Vehicle
-            tourManager.addCustomer(); //********************
+            tourManager.addCustomer();
             break;
         case 2:
             // Assign to Vehicle
@@ -350,9 +249,111 @@ int clientReservationAndPaymentTracking() {
     } while (choice != 0);
     return -2;
 }
+//*******************************************************************
+//Menu 3
+int vehicleAssignmentsMenu(TourProgramManagement& tourManager) {
+    int vehicleChoice;
+
+    do {
+        cout << "\nVehicle Assignments Menu:\n";
+        cout << "1- Add Vehicle\n";
+        cout << "2- Assign to Vehicle\n";
+        cout << "0- Return to Guide and Transportation Menu\n";
+        cout << "Enter your choice: ";
+        cin >> vehicleChoice;
+
+        switch (vehicleChoice) {
+        case 1:
+            // Add Vehicle
+            tourManager.addVehicle();
+            break;
+        case 2:
+            // Assign to Vehicle
+            tourManager.assignToVehicle();
+            break;
+        case 0:
+            // Return to Guide and Transportation Menu
+            cout << "Returning to Guide and Transportation Menu.\n";
+            break;
+        default:
+            cout << "Invalid choice. Please enter a valid option.\n";
+            break;
+        }
+    } while (vehicleChoice != 0);
+    return -2;
+}
+int guideAssignmentsMenu(TourProgramManagement& tourManager) {
+    int guideChoice;
+
+    do {
+        cout << "\nGuide and Trasnportation Records Menu:\n";
+        cout << "1- Add Guide\n";
+        cout << "2- Assign Guide to Tour\n";
+        cout << "0- Return to Guide and Transportation Menu\n";
+        cout << "Enter your choice: ";
+        cin >> guideChoice;
+
+        switch (guideChoice) {
+        case 1:
+            // Add Vehicle
+            tourManager.addGuide();
+            break;
+        case 2:
+            // Assign to Vehicle
+            tourManager.assignToGuide();
+            break;
+        case 0:
+            // Return to Guide and Transportation Menu
+            cout << "Returning to Guide and Transportation Menu.\n";
+            break;
+        default:
+            cout << "Invalid choice. Please enter a valid option.\n";
+            break;
+        }
+    } while (guideChoice != 0);
+    return -2;
+}
+
+int guideAndTransportationPlanning() {
+    TourProgramManagement tourManager;  // TourProgramManagement sınıfından bir nesne oluşturuyoruz.
+
+    int choice;
+    do {
+        cout << "Guide and Transportation Planning Menu\n";
+        cout << "1-Itineraries\n";
+        cout << "2-Vehicle Assignments\n";
+        cout << "3-Guide Training Records\n";
+        cout << "0-Back to Main Menu\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 0:
+            cout << "Returning to the main menu...\n";
+            break;
+        case 1:
+            tourManager.Itineraries();
+            break;
+        case 2:
+            // Vehicle Assignments işlemleri eklenecek (istenildiğinde).
+            vehicleAssignmentsMenu(tourManager);
+            break;
+        case 3:
+            // Guide Training Records işlemleri eklenecek (istenildiğinde).
+            guideAssignmentsMenu(tourManager);
+            break;
+
+        default:
+            cout << "Invalid choice. Please try again.\n";
+            break;
+        }
+    } while (choice != 0);
+    return 0;
+}
+
 
 //*************************************************************************************
-
+//Menu 4
 int integrations() {
     cout << "Integrations Menu\n";
     int choice;

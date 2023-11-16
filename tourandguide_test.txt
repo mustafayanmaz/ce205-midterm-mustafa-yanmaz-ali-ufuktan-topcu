@@ -1,0 +1,4 @@
+Available Tours:
+1-sa
+2-as
+Enter the number of the tour to assign a guide: Invalid choice. Assignment failed.

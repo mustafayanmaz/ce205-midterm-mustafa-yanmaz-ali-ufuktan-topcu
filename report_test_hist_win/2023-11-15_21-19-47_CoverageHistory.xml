@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<coverage version="1.0" date="2023-11-15_21-19-47" tag="">
+  <assembly name="C:\Users\yanmu\Desktop\ce205-midterm-mustafa-yanmaz-ali-ufuktan-topcu\build_win\build\Debug\tourism_tests.exe">
+    <class name="tourism_test.cpp" coveredlines="117" coverablelines="122" totallines="341" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+    <class name="tourism.cpp" coveredlines="212" coverablelines="569" totallines="1107" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+  </assembly>
+  <assembly name="C:\Users\yanmu\Desktop\ce205-midterm-mustafa-yanmaz-ali-ufuktan-topcu\build_win\build\Debug\tourismapp.exe">
+    <class name="tourism.cpp" coveredlines="212" coverablelines="569" totallines="1107" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+  </assembly>
+  <assembly name="C:\Users\yanmu\Desktop\ce205-midterm-mustafa-yanmaz-ali-ufuktan-topcu\build_win\build\Debug\utility_tests.exe">
+    <class name="mathUtility.cpp" coveredlines="41" coverablelines="42" totallines="77" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+    <class name="utility_test.cpp" coveredlines="57" coverablelines="57" totallines="144" coveredbranches="0" totalbranches="0" coveredcodeelements="0" totalcodeelements="0" />
+  </assembly>
+</coverage>

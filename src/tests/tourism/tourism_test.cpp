@@ -1,6 +1,6 @@
-#include "gtest/gtest.h"
+﻿#include "gtest/gtest.h"
 #include "../src/tourism.cpp"  // Include the implementation file for testing
-#include "../header/tourism.h"  // Header dosyas�n�n yolunu d�zeltmeyi unutmay�n!
+#include "../header/tourism.h"  // Header dosyasýnýn yolunu düzeltmeyi unutmayýn!
 
 using namespace Coruh::Tourism;
 
@@ -22,7 +22,7 @@ protected:
 };
 
 // Test case for addTrip function
-TEST_F(TripManagementTest, AddTripFunctionTest) { //ge�iyoooo
+TEST_F(TripManagementTest, AddTripFunctionTest) { //geçiyoooo
     // Arrange: Set up any necessary preconditions or inputs
     // ...
 
@@ -35,7 +35,7 @@ TEST_F(TripManagementTest, AddTripFunctionTest) { //ge�iyoooo
 }
 
 // Test case for assignToTrip function
-TEST_F(TripManagementTest, AssignToTripFunctionTest) { //ge�iyoooo
+TEST_F(TripManagementTest, AssignToTripFunctionTest) { //geçiyoooo
     // Arrange: Set up any necessary preconditions or inputs
     // ...
 
@@ -246,22 +246,22 @@ TEST(AssignToGuideTest, AssignToGuide) {
 TEST(ItinerariesTest, ValidChoice) {
     TourProgramManagement tourManager;
 
-    // E�er turlar varsa, bir tur ekleyin
+    // Eðer turlar varsa, bir tur ekleyin
     if (!tourManager.tours.empty()) {
-        // Giri�e �rnek bir tur se�imi ve g�zergah ekleyin
-        int choice = 1; // �rnek olarak ilk turu se�tik
+        // Giriþe örnek bir tur seçimi ve güzergah ekleyin
+        int choice = 1; // Örnek olarak ilk turu seçtik
         std::string itinerary = "Sample Itinerary";
 
-        // Itineraries fonksiyonunu �a��r�n ve d�n�� de�erini kontrol edin
+        // Itineraries fonksiyonunu çaðýrýn ve dönüþ deðerini kontrol edin
         int result = tourManager.Itineraries();
 
-        // Debug ��kt�s� ekleyin
+        // Debug çýktýsý ekleyin
         std::cout << "Debug: Result: " << result << std::endl;
 
         ASSERT_EQ(result, 0);
     }
     else {
-        // E�er turlar yoksa, testi ge�irme (PASS) olarak i�aretleyin
+        // Eðer turlar yoksa, testi geçirme (PASS) olarak iþaretleyin
         SUCCEED();
     }
 }
@@ -269,16 +269,16 @@ TEST(ItinerariesTest, ValidChoice) {
 TEST(ItinerariesTest, InvalidChoice) {
     TourProgramManagement tourManager;
 
-    // E�er turlar varsa, olmayan bir tur se�imi ekleyin
+    // Eðer turlar varsa, olmayan bir tur seçimi ekleyin
     if (!tourManager.tours.empty()) {
-        // Giri�e �rnek bir tur se�imi ve g�zergah ekleyin
-        int choice = tourManager.tours.size() + 1; // Olmayan bir tur se�imi
+        // Giriþe örnek bir tur seçimi ve güzergah ekleyin
+        int choice = tourManager.tours.size() + 1; // Olmayan bir tur seçimi
 
-        // Itineraries fonksiyonunu �a��r�n ve d�n�� de�erini kontrol edin
+        // Itineraries fonksiyonunu çaðýrýn ve dönüþ deðerini kontrol edin
         EXPECT_EQ(tourManager.Itineraries(), 0);
     }
     else {
-        // E�er turlar yoksa, testi ge�irme (PASS) olarak i�aretleyin
+        // Eðer turlar yoksa, testi geçirme (PASS) olarak iþaretleyin
         SUCCEED();
     }
 }
@@ -330,6 +330,50 @@ TEST(ItinerariesTest, InvalidChoice) {
 // std::remove("guide_test.txt");
 // }
 
+TEST(AssignToCustomerTest, ValidAssignment) {
+    // Test için TourProgramManagement nesnesini oluşturun
+    TourProgramManagement tourManager;
+
+    // Eğer turlar varsa, bir tur ve müşteri ekleyin
+    if (!tourManager.tours.empty()) {
+        // Örnek bir tur ve müşteri seçimi ve güzergah ekleyin
+        int tourChoice = 1;  // Örnek olarak ilk turu seçtik
+
+        // Itineraries fonksiyonunu çağırın ve dönüş değerini kontrol edin
+        int result = tourManager.assignToCustomer();
+
+        // Eğer her şey başarılıysa 0 dönmelidir
+        ASSERT_EQ(result, 0);
+
+        // Assignment başarılı olduysa, dosyaya kaydedilen verileri kontrol edin
+        std::ifstream file("tourandcustomer.txt");
+        if (file.is_open()) {
+            std::string line;
+            bool assignmentFound = false;
+
+            // Dosyadaki her satırı kontrol edin
+            while (getline(file, line)) {
+                if (line.find("Tour: ") != std::string::npos) {
+                    assignmentFound = true;
+                    break;
+                }
+            }
+
+            file.close();
+
+            // Eğer tur ve müşteri eşleştirmesi dosyada bulunursa başarılı
+            ASSERT_TRUE(assignmentFound);
+        }
+        else {
+            // Dosyayı açamazsak testi başarısız olarak işaretle
+            ADD_FAILURE() << "Failed to open the file for reading.";
+        }
+    }
+    else {
+        // Eğer turlar yoksa, testi geçirme (PASS) olarak işaretleyin
+        SUCCEED();
+    }
+}
 
 
 
